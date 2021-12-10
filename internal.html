@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/Montserrat/stylesheet.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    <style>
+        pre code {
+          background-color: #eee;
+          border: 1px solid #999;
+          display: block;
+          padding: 20px;
+        }
+        html, body {
+            width: 100%!important;
+            height: 100%!important;
+            overflow-x: hidden!important;
+            margin: 0px!important;
+            padding: 0px!important;
+        }
+        body{
+            padding-top: 0px!important;
+            font-family: Montserrat-Regular!important;
+
+        }
+        .wrap{
+            overflow-x: hidden!important;
+        }
+        .nav-text{
+            color: #ffffff!important;
+        }
+        .nav-text:hover{
+            color: #B38E5D!important;
+        }
+        .panel-footer[data-v-58f74857] {
+            font-family: Montserrat-Regular;
+            font-size: .9em;
+            color: #fff;
+            line-height: 1.5;
+            background-color: #12322b;
+        }
+        a[data-v-58f74857]:hover {
+            text-decoration: underline;
+            color: #38a2f9 !important;
+        }
+
+        a[data-v-58f74857]{
+            color: #FFFFFF;
+        }
+    </style>
+    <title>Developer view</title>
+
+    <nav class="navbar navbar-expand-lg" style="background: #0B231E">
+        <div class="container">
+            <a href="https://www.gob.mx" style="padding: 1px 3px 3px 3px;" class="navbar-brand " title="Ir a la página inicial">
+                <img data-v-27b47ae7="" src="https://framework-gb.cdn.gob.mx/landing/img/logoheader.svg" alt="logo gobierno de méxico" class="logos" style="width: 8rem; margin-top: -2%; margin-bottom: -2%; margin-left: -15%;">
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbartopgob" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon">
+                        <i class="fas fa-bars" style="color:#fff; font-size:28px;"></i>
+                    </span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbartopgob">
+                <ul class="navbar-nav ml-auto my-2 my-lg-0">
+                    <li class="nav-item gobnav" style="text-align: center"><a class="nav-link nav-text" href="https://www.gob.mx/tramites" title="Trámites" style=" color: white" >Trámites </a></li>
+                    <li class="nav-item gobnav" style="text-align: center"><a class="nav-link nav-text" href="https://www.gob.mx/gobierno" title="Gobierno" style=" color: white">Gobierno</a></li>
+                    <li class="nav-item gobnav" style="text-align: center">
+                        <form accept-charset="UTF-8" action="/busqueda" method="get"><div style="display:none"><input name="utf8" type="hidden" value="✓"></div>
+                            <input type="hidden" name="site" value="sep">
+                            <button data-v-6394873e="" id="botonbuscar" type="button" class="btn btn-search"><a data-v-6394873e="" href="https://www.gob.mx/busqueda?utf8=✓" target="_blank" id="botbusca"><img data-v-6394873e="" alt="Buscar" src="https://framework-gb.cdn.gob.mx/landing/img/lupa.png"></a></button>
+                        </form>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <nav class="navbar navbar-expand-lg" style="background: #13322B">
+        <div class="container">
+            <button class="ml-auto navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarbotimss" aria-controls="navbarbotimss" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon">
+                        <i class="fas fa-bars" style="color:#fff; font-size:28px;"></i>
+                    </span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarbotimss">
+                <ul class="navbar-nav ml-auto my-2 my-lg-0">
+                    <li class="nav-item gobnav" style="text-align: center"><a class="nav-link nav-text" href="" title="Inicio" style="" >Inicio</a></li>
+                    <li class="nav-item gobnav" style="text-align: center"><a class="nav-link nav-text" href="http://11.254.36.175/" title="Plataformas" style="">Plataformas IMSS</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+</head>
+<body>
+    <div class="container">
+            <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" style="margin-top: 3%; margin-bottom: 3%;">
+                    <h2 style="text-align: center">
+                        <b>Procesos de Ingeniería de Características</b>
+                    </h2>
+                    <p style="font-size: 20px">
+                        En esta sección se describe el proceso de "data gathering", analisis exploratorio de datos(EDA),
+                        limpieza y visualización de datos.
+                    </p>
+                </div>
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" style="margin-top: 3%; ">
+                    <h4 style="text-align: left">
+                        <b>1.- Descripción del problema</b>
+                    </h4>
+                    <p style="font-size: 20px">
+                        México superó a mitad de noviembre la barrera de las 100.000 muertes confirmadas por coronavirus, lo que lo convierte en el cuarto país con mayor número de muertes, después de Estados Unidos, Brasil e India.
+
+                        <br><br>Existe una gran variedad de razones por las cuales México a experimentado una pandemia tan mortal, unas de ellas son las comorbilidades, la exposición al contagio, el limitado acceso a los servicios de salud y tratamiento a tiempo, muchas veces debido a disparidades socioeconómicas.
+
+                        <br><br>Con el fin de poder definir las acciones a tomar para el próximo año 2022 y poder generar un refuerzo positivo en la población, no únicamente mediante la aplicación de vacunas, se anexa esta sección donde se presenta un panorama de las principales comorbilidades de la población mexicana, que en conjunto con el diagnóstico positivo de COVID-19, son las principales causas de muerte.
+
+                        <br><br>La evidencia, entre tanto, muestra una clara correlación entre los casos graves o fatales de COVID-19 y afecciones como la obesidad y la diabetes.
+                    </p>
+                </div>
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" style="margin-top: 3%; ">
+                    <h4 style="text-align: left">
+                        <b>2.- Data gathering</b>
+                    </h4>
+                    <p style="font-size: 20px">
+                        En esta sección se obtendran los datos desde la página <a target="_blank" href="https://www.gob.mx/salud/documentos/datos-abiertos-152127">https://www.gob.mx/salud/documentos/datos-abiertos-152127</a>,
+                        de donde obtendremos la información mas actualizada sobre los casos de COVID-19 en México.
+                        <br><br>
+                        Por motivos de ahorro de espacio en Github o el servidor, se realiza una validación para determinar la existencia de un dataset
+                        crudo, en caso de que no exista exista, se procede a descargar y descomprimir el dataset en crudo y una vez terminado este proceso,
+                        se eliminan los documentos que ya no se utilizarán. <br>Archivo: <a href="" target="_blank">data_preparation.py</a>
+                    </p>
+                    <pre>
+                        <code>
+                        #Descarga el dataset
+                        if(path.exists("data/raw_data/graph0-RAW.csv") == False):
+                            wget.download('https://datosabiertos.salud.gob.mx/gobmx/salud/datos_abiertos/datos_abiertos_covid19.zip', "data/raw_data" )
+                            with ZipFile("data/raw_data/datos_abiertos_covid19.zip", 'r') as zip:
+                                #Muestra los contenidos del archivo zip
+                                zip.printdir()
+                                #Se extraen los documentos
+                                print('Extracting all the files now...')
+                                zip.extractall("data/raw_data")
+                                print('Done!')
+
+                            filename = glob("data/raw_data/*COVID19MEXICO.csv")[0]
+                            os.rename(filename, "data/raw_data/graph0-RAW.csv")
+
+                            df_g0_raw = pd.read_csv("data/raw_data/graph0-RAW.csv", nrows=100)
+
+                        else:
+                            df_g0_raw = pd.read_csv(
+                                "data/raw_data/graph0-RAW.csv", nrows=num_rows)
+                            # Se eliminan los documentos extras para reducir espacio
+                            if (path.exists("data/raw_data/datos_abiertos_covid19.zip")):
+                                os.remove("data/raw_data/datos_abiertos_covid19.zip")
+
+                            if (path.exists("data/raw_data/graph0-RAW.csv")):
+                                os.remove("data/raw_data/graph0-RAW.csv")
+                        </code>
+                    </pre>
+                </div>
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" style="margin-top: 3%; ">
+                    <h4 style="text-align: left">
+                        <b>3.- Limpieza de datos y eliminación de información innecesaria</b>
+                    </h4>
+                    <p style="font-size: 20px">
+                        Un vez que se han descargado los datos, estos se tienen en un formato en crudo, pues existen valores
+                        que no tienen información, asi como registros y columnas que no nos seran de utilidad para el fin establecido anteriormente.
+                        Se estara siguiendo un orden de depuracion decremental, para poder eliminar la mayor información posible desde el inicio.
+                        <br><br>
+                        <b>&emsp;Paso 1: Eliminación y depuración de datos</b>
+                        Se eliminan las columnas inecesarias del dataset  <a href="" target="_blank">data_preparation.py</a>
+                    </p>
+                    <pre>
+                        <code>
+                        def data_cleaning_g0(df_g0_raw,output_file):
+                            # region Data_cleaning_g0
+                            # Seleccionamos información requerida y se sustituyen valores no requeridos
+                            df_g0_raw = df_g0_raw.loc[(df_g0_raw.FECHA_DEF != '9999-99-99') & ((df_g0_raw.CLASIFICACION_FINAL == 1 ) | (df_g0_raw.CLASIFICACION_FINAL == 2 ) | (df_g0_raw.CLASIFICACION_FINAL == 3 ) )]
+                            df_g0_raw.drop(df_g0_raw.filter(regex="Unname"), axis=1, inplace=True)
+
+                            df_g0_raw.assign(FECHA_DEF = pd.to_datetime(df_g0_raw.FECHA_DEF).dt.strftime('%Y-%m-%d'))
+
+                            #Revisamos y eliminamos si hay valores nulos
+                            if(df_g0_raw.FECHA_DEF.isnull().values.any() > 0):
+                                df_g0_raw.dropna(how= 'any', axis=0, subset=['FECHA_DEF'], inplace = True)
+
+                            print("Forma del dataframe: " + str(df_g0_raw.shape))
+                            print("Tipo de datos: ")
+                            print(df_g0_raw.dtypes)
+                            # Valores duplicados
+                            print("Duplicados:   " + str(df_g0_raw.duplicated().sum()))
+                            df_g0_raw.drop_duplicates(
+                                subset=['SEXO', 'ENTIDAD_RES', 'FECHA_DEF', 'NEUMONIA', 'EDAD', 'DIABETES', 'EPOC', 'ASMA', 'INMUSUPR',
+                                        'HIPERTENSION', 'OTRA_COM', 'CARDIOVASCULAR', 'OBESIDAD', 'RENAL_CRONICA', 'TABAQUISMO',
+                                        'CLASIFICACION_FINAL'], keep="first", inplace=True)
+                            print("Pos eliminación de duplicados: " + str(df_g0_raw.shape))
+
+                            #Guardamos el dataframe limpio
+                            df_g0_raw.to_csv("data/tidy_data/"+output_file)
+
+                            return df_g0_raw
+                            #endregion
+                        </code>
+                    </pre>
+                    <p style="font-size: 20px">
+                        <b>&emsp;Paso 2:</b>
+                        Se realiza un analisis exploratorio de la estructura del dataframe para poder determinar el tipo
+                        de información y si existen datos repetidos para asi poder determinar las futuras acciones
+                    </p>
+                    <pre>
+                        <code>
+                            Forma del dataframe: (295313, 16)
+                            Tipo de datos:
+                            SEXO                    int64
+                            ENTIDAD_RES             int64
+                            FECHA_DEF              object
+                            NEUMONIA                int64
+                            EDAD                    int64
+                            DIABETES                int64
+                            EPOC                    int64
+                            ASMA                    int64
+                            INMUSUPR                int64
+                            HIPERTENSION            int64
+                            OTRA_COM                int64
+                            CARDIOVASCULAR          int64
+                            OBESIDAD                int64
+                            RENAL_CRONICA           int64
+                            TABAQUISMO              int64
+                            CLASIFICACION_FINAL     int64
+                            dtype: object
+                            Duplicados:   6005
+                            Pos eliminación de duplicados: (289308, 16)
+                        </code>
+                    </pre>
+                </div>
+
+
+
+
+
+
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" style="margin-top: 3%; ">
+                    <h4 style="text-align: left">
+                        <b>Análisis exploratorio de datos(EDA)</b>
+                    </h4>
+                    <p style="font-size: 20px">
+                        En esta sección se obtendran los datos desde la página <a target="_blank" href="https://www.gob.mx/salud/documentos/datos-abiertos-152127">https://www.gob.mx/salud/documentos/datos-abiertos-152127</a>,
+                        de donde obtendremos la información mas actualizada sobre los casos de COVID-19 en México.
+                        <br><br>
+                        Por motivos de ahorro de espacio en Github o el servidor, se realiza una validación para determinar la existencia de un dataset
+                        crudo, en caso de que no exista exista, se procede a descargar y descomprimir el dataset en crudo y una vez terminado este proceso,
+                        se eliminan los documentos que ya no se utilizarán. <br><b>Archivo:</b> <a href="" target="_blank">data_preparation.py</a>
+                    </p>
+                    <pre>
+                        <code>
+                        #Descarga el dataset
+                        if(path.exists("data/raw_data/graph0-RAW.csv") == False):
+                            wget.download('https://datosabiertos.salud.gob.mx/gobmx/salud/datos_abiertos/datos_abiertos_covid19.zip', "data/raw_data" )
+                            with ZipFile("data/raw_data/datos_abiertos_covid19.zip", 'r') as zip:
+                                #Muestra los contenidos del archivo zip
+                                zip.printdir()
+                                #Se extraen los documentos
+                                print('Extracting all the files now...')
+                                zip.extractall("data/raw_data")
+                                print('Done!')
+
+                            filename = glob("data/raw_data/*COVID19MEXICO.csv")[0]
+                            os.rename(filename, "data/raw_data/graph0-RAW.csv")
+
+                            df_g0_raw = pd.read_csv("data/raw_data/graph0-RAW.csv", nrows=100)
+
+                        else:
+                            df_g0_raw = pd.read_csv(
+                                "data/raw_data/graph0-RAW.csv", nrows=num_rows)
+                            # Se eliminan los documentos extras para reducir espacio
+                            if (path.exists("data/raw_data/datos_abiertos_covid19.zip")):
+                                os.remove("data/raw_data/datos_abiertos_covid19.zip")
+
+                            if (path.exists("data/raw_data/graph0-RAW.csv")):
+                                os.remove("data/raw_data/graph0-RAW.csv")
+                        </code>
+                    </pre>
+                </div>
+
+            </div>
+
+    </div>
+</body>
+<footer data-v-58f74857="" data-v-713a81f3="" class="panel-footer" style="padding-bottom: 0; background: #12322B">
+    <div data-v-58f74857="" class="container" style="padding-bottom: 30px">
+        <div data-v-58f74857="" class="row">
+            <div data-v-58f74857="" class="col-sm-6 col-lg-3"><img data-v-58f74857="" src="https://framework-gb.cdn.gob.mx/landing/img/logofooter.png" href="/" alt="logo gobierno de méxico" class="logo_footer" style="max-width: 90%; margin-left: -6%; margin-top: 22%;"></div>
+            <div data-v-58f74857="" class="col-sm-6 col-lg-3" style="padding-top: 40px;">
+                <h4 data-v-58f74857="" id="division" align="left">Enlaces</h4>
+                <ul data-v-58f74857=""  class="list-unstyled">
+                    <li data-v-58f74857=""><a style="" data-v-58f74857="" href="http://www.participa.gob.mx" target="_blank">Participa</a></li>
+                    <li data-v-58f74857=""><a data-v-58f74857="" href="https://www.gob.mx/publicaciones" target="_blank">Publicaciones Oficiales</a></li>
+                    <li data-v-58f74857=""><a data-v-58f74857="" href="http://www.ordenjuridico.gob.mx" target="_blank">Marco Jurídico</a></li>
+                    <li data-v-58f74857=""><a data-v-58f74857="" href="https://consultapublicamx.inai.org.mx/vut-web/" target="_blank">Plataforma Nacional de Transparencia</a></li>
+                </ul>
+            </div>
+            <div data-v-58f74857="" class="col-sm-6 col-lg-3" style="padding-top: 40px;">
+                <h4 data-v-58f74857="" id="division" align="left">¿Qué es gob.mx?</h4>
+                <p data-v-58f74857="">Es el portal único de trámites, información y participación ciudadana. <a data-v-58f74857="" href="https://www.gob.mx/que-es-gobmx"><u data-v-58f74857="">Leer más</u></a></p>
+                <ul data-v-58f74857="" class="list-unstyled">
+                    <li data-v-58f74857=""><a data-v-58f74857="" href="https://datos.gob.mx">Portal de datos abiertos</a></li>
+                    <li data-v-58f74857=""><a data-v-58f74857="" href="https://www.gob.mx/accesibilidad">Declaración de accesibilidad</a></li>
+                    <li data-v-58f74857=""><a data-v-58f74857="" href="https://www.gob.mx/privacidadintegral">Aviso  de privacidad integral</a></li>
+                    <li data-v-58f74857=""><a data-v-58f74857="" href="https://www.gob.mx/privacidadsimplificado">Aviso de privacidad simplificado</a></li>
+                    <li data-v-58f74857=""><a data-v-58f74857="" href="https://www.gob.mx/terminos">Términos y condiciones</a></li>
+                    <li data-v-58f74857=""><a data-v-58f74857="" href="https://www.gob.mx/terminos#medidas-seguridad-informacion">Política de seguridad</a></li>
+                    <li data-v-58f74857=""><a data-v-58f74857="" href="https://www.gob.mx/sitemap">Mapa del sitio</a></li>
+                </ul>
+            </div>
+            <div data-v-58f74857="" class="col-sm-6 col-lg-3" style="padding-top: 40px;">
+                <h6 data-v-58f74857="" id="division" align="left"></h6>
+                <h4 data-v-58f74857=""><a data-v-58f74857="" href="https://www.gob.mx/tramites/ficha/presentacion-de-quejas-y-denuncias-en-la-sfp/SFP54"><u data-v-58f74857="">Denuncia contra servidores públicos</u></a></h4>
+                <br data-v-58f74857="">
+                <h4 data-v-58f74857="" id="redes">Síguenos en:</h4>
+                <ul data-v-58f74857="" id="social" class="list-inline">
+                    <li data-v-58f74857="" class="list-inline-item"><a data-v-58f74857="" href="https://www.facebook.com/gobmexico/" target="_blank" red="Facebook" title="Enlace a facebook abre en una nueva ventana" class="sendEstFooterRs share-info"><img data-v-58f74857="" alt="Facebook" src="https://framework-gb.cdn.gob.mx/landing/img/facebook.png"></a></li>
+                    <li data-v-58f74857="" class="list-inline-item"><a data-v-58f74857="" href="https://twitter.com/GobiernoMX" target="_blank" red="Twitter" title="Enlace a twitter abre en una nueva ventana" class="sendEstFooterRs share-info"><img data-v-58f74857="" alt="Twitter" src="https://framework-gb.cdn.gob.mx/landing/img/twitter.png"></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div data-v-58f74857="" class="">
+        <div data-v-58f74857="" class="row">
+            <img src="/imgs/pleca_footer.svg" style="width: 100%" alt="">
+        </div>
+    </div>
+</footer>
+</html>

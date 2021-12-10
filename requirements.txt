@@ -1,0 +1,4 @@
+gunicorn==20.1.0
+pandas==1.2.4
+plotly
+dash_bootstrap_components

@@ -1,0 +1,25 @@
+.col-navbar {
+    text-align: center;
+    padding-top: 7px;
+}
+.a-text-navbar:hover{
+    color: #D4C19C;
+}
+.a-text-navbar {
+    color: #FFFFFF;
+    text-decoration: none;
+    font-size: 1.2em;
+}
+.col-navbar-light {
+    color: #FFFFFF;
+    text-decoration: none;
+    font-size: 1em;
+    text-align: center;
+
+}
+.col-navbar-light:hover {
+    color: #285C4D;
+    text-decoration: none;
+    font-size: 1em;
+    background: #285C4D;
+}

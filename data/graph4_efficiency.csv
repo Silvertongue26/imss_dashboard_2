@@ -1,0 +1,43 @@
+﻿brand,lineage,efficiency
+Pfizer,Alpha,100
+Pfizer,Beta,95
+Pfizer,Delta,96
+Pfizer,Epsilon,88
+Pfizer,Gamma,0
+Pfizer,Lambda,0
+Pfizer,Mu,0
+Moderna,Alpha,94.1
+Moderna,Beta,94.1
+Moderna,Delta,86.4
+Moderna,Epsilon,80
+Moderna,Gamma,0
+Moderna,Lambda,0
+Moderna,Mu,0
+Janssen,Alpha,80
+Janssen,Beta,72
+Janssen,Delta,66.3
+Janssen,Epsilon,50
+Janssen,Gamma,34
+Janssen,Lambda,0
+Janssen,Mu,0
+AstraZeneca,Alpha,74.6
+AstraZeneca,Beta,74.6
+AstraZeneca,Delta,60
+AstraZeneca,Epsilon,70
+AstraZeneca,Gamma,70
+AstraZeneca,Lambda,70
+AstraZeneca,Mu,70
+Sinovac,Alpha,51
+Sinovac,Beta,30
+Sinovac,Delta,15
+Sinovac,Epsilon,30
+Sinovac,Gamma,20
+Sinovac,Lambda,0
+Sinovac,Mu,0
+Sputnik V,Alpha,97.6
+Sputnik V,Beta,95
+Sputnik V,Delta,90
+Sputnik V,Epsilon,93
+Sputnik V,Gamma,90
+Sputnik V,Lambda,0
+Sputnik V,Mu,0
