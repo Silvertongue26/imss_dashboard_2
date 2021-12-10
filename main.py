@@ -4,14 +4,7 @@ IMPORTS BEGINS
 """
 import data_preparation as dtp
 import data_cleaning as dtc
-import data_manipulation as dtm
-import data_visualization as dtv
-import pandas as pd
 import EDA
-import numpy as np
-import plotly.express as px
-import plotly.graph_objects as go
-import os.path
 import gunicorn
 
 import dash_bootstrap_components as dbc
@@ -155,10 +148,10 @@ BODY - BEGINS
 """
 #df_g0 = dtp.data_preparation_g0()
 ###ELIMINAR
-df_g0 = dtp.data_preparation_g0(10000)
+df_g0 = dtp.data_preparation_g0()
 #df_g0 = pd.read_csv("data/tidy_data/graph0-gen_data_mx.csv")
 #df_g0 = dtc.data_cleaning_g0(df_g0, "graph0-gen_data_mx.csv")
-#dtc.outlier_detection_g0(df_g0)
+dtc.outlier_detection_g0(df_g0)
 EDA.data_eda_g0(df_g0)
 #dtv.data_visualization_g0(df_g0)
 

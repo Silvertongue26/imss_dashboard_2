@@ -3,7 +3,6 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import EDA
 
-
 def data_cleaning_g0(df_g0_raw,output_file):
     print("******************* STARTING DATA CLEANING g0 *******************")
     # region Data_cleaning_g0
@@ -47,6 +46,7 @@ def data_cleaning_g0(df_g0_raw,output_file):
         df_g0_raw.dropna(how= 'any', axis=0, subset=['FECHA_DEF'], inplace = True)
 
     #Buscamos y eliminamos valores duplicados
+    print("Pre eliminación de duplicados: " + str(df_g0_raw.shape))
     print("Duplicados:   " + str(df_g0_raw.duplicated().sum()))
     df_g0_raw.drop_duplicates(
         subset=['SEXO', 'FECHA_DEF', 'NEUMONIA', 'EDAD', 'DIABETES', 'EPOC', 'ASMA', 'INMUSUPR',
@@ -61,14 +61,7 @@ def data_cleaning_g0(df_g0_raw,output_file):
     #endregion
 
 def outlier_detection_g0(df_g0):
-
-
-    plt.figure(figsize=(15, 6))
-    sns.set(font_scale=.8)
-    hm = sns.heatmap(df_g0.corr(), vmin=-1, vmax=1, annot=True, cmap='PiYG')
-    hm.set_title('Correlation Heatmap', fontdict={'fontsize': 15})
-    plt.savefig('data/assets/g0/heatmap.png')
-
+    print("******************* STARTING OUTLIERS g0 *******************")
 
     g = sns.pairplot(df_g0, x_vars=["EDAD", "CLASIFICACION_FINAL"],
                      y_vars=["EDAD", "CLASIFICACION_FINAL"], corner=True,  diag_kind="kde"
@@ -76,7 +69,7 @@ def outlier_detection_g0(df_g0):
     g.map_lower(sns.kdeplot, levels=4, color=".2")
     #plt.show()
     plt.savefig('data/assets/g0/pairplot.png')
-
+    print("******************* ENDING OUTLIERS g0 *******************")
 
 def data_cleaning_g1(df_g1_raw,output_file):
     return 1

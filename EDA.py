@@ -35,6 +35,12 @@ def data_eda_g0(df_g0):
 
     df_g0["SEXO"].replace({"Mujer":1, "Hombre":2}, inplace=True)
 
+    plt.figure(figsize=(15, 6))
+    sns.set(font_scale=.8)
+    hm = sns.heatmap(df_g0.corr(), vmin=-1, vmax=1, annot=True, cmap='PiYG')
+    hm.set_title('Correlation Heatmap', fontdict={'fontsize': 15})
+    plt.savefig('data/assets/g0/heatmap.png')
+
     #print(df_g0.groupby(df_g0['FECHA_DEF']))
     df_profile = ProfileReport(
         df_g0_sum,
@@ -45,7 +51,7 @@ def data_eda_g0(df_g0):
 
     df_profile.to_file("data/assets/g0/eda_g0_profile.html")
 
-    #SV_profile = sweetviz.analyze(df_g0_sum)
-    #SV_profile.show_html("data/assets/g0/eda_g0_profile_SV.html")
+    SV_profile = sweetviz.analyze(df_g0_sum)
+    SV_profile.show_html("data/assets/g0/eda_g0_profile_SV.html")
     print("******************* ENDING EDA g0 *******************")
 

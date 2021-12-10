@@ -11,6 +11,38 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
     <style>
+        body{
+            text-align: justify!important;
+        }
+        /* Style the button that is used to open and close the collapsible content */
+        .collapsible {
+          background-color: #eee;
+          color: #444;
+          cursor: pointer;
+          padding: 18px;
+          width: 100%;
+          border: none;
+          text-align: left;
+          outline: none;
+          font-size: 15px;
+        }
+
+        /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+        .active, .collapsible:hover {
+          background-color: #ccc;
+        }
+
+        /* Style the collapsible content. Note: hidden by default */
+        .content {
+          padding: 0 18px;
+          display: none;
+          overflow: hidden;
+          background-color: #f1f1f1;
+        }
+
+
+
+
         pre code {
           background-color: #eee;
           border: 1px solid #999;
@@ -132,15 +164,18 @@
                         de donde obtendremos la información mas actualizada sobre los casos de COVID-19 en México.
                         <br><br>
                         Por motivos de ahorro de espacio en Github o el servidor, se realiza una validación para determinar la existencia de un dataset
-                        crudo, en caso de que no exista exista, se procede a descargar y descomprimir el dataset en crudo y una vez terminado este proceso,
-                        se eliminan los documentos que ya no se utilizarán. <br>Archivo: <a href="" target="_blank">data_preparation.py</a>
+                        "tidy", en caso de que no exista exista, se procede a descargar y descomprimir el dataset en crudo y una vez terminado este proceso,
+                        se eliminan los documentos que ya no se utilizarán.
+                        <br><b>Archivo: </b><a href="https://github.com/Silvertongue26/imss_dashboard_2/blob/master/data_preparation.py" target="_blank">data_preparation.py</a>
                     </p>
-                    <pre>
-                        <code>
-                        #Descarga el dataset
-                        if(path.exists("data/raw_data/graph0-RAW.csv") == False):
-                            wget.download('https://datosabiertos.salud.gob.mx/gobmx/salud/datos_abiertos/datos_abiertos_covid19.zip', "data/raw_data" )
-                            with ZipFile("data/raw_data/datos_abiertos_covid19.zip", 'r') as zip:
+                    <button type="button" class="collapsible" style="text-align: center"><b>#VER CODIGO</b></button>
+                    <div class="content">
+                        <pre>
+                            <code style="overflow: scroll">
+                                #Descarga el dataset
+                                if(path.exists("data/raw_data/graph0-RAW.csv") == False):
+                                wget.download('https://datosabiertos.salud.gob.mx/gobmx/salud/datos_abiertos/datos_abiertos_covid19.zip', "data/raw_data" )
+                                with ZipFile("data/raw_data/datos_abiertos_covid19.zip", 'r') as zip:
                                 #Muestra los contenidos del archivo zip
                                 zip.printdir()
                                 #Se extraen los documentos
@@ -148,37 +183,45 @@
                                 zip.extractall("data/raw_data")
                                 print('Done!')
 
-                            filename = glob("data/raw_data/*COVID19MEXICO.csv")[0]
-                            os.rename(filename, "data/raw_data/graph0-RAW.csv")
+                                filename = glob("data/raw_data/*COVID19MEXICO.csv")[0]
+                                os.rename(filename, "data/raw_data/graph0-RAW.csv")
 
-                            df_g0_raw = pd.read_csv("data/raw_data/graph0-RAW.csv", nrows=100)
+                                df_g0_raw = pd.read_csv("data/raw_data/graph0-RAW.csv", nrows=100)
 
-                        else:
-                            df_g0_raw = pd.read_csv(
+                                else:
+                                df_g0_raw = pd.read_csv(
                                 "data/raw_data/graph0-RAW.csv", nrows=num_rows)
-                            # Se eliminan los documentos extras para reducir espacio
-                            if (path.exists("data/raw_data/datos_abiertos_covid19.zip")):
+                                # Se eliminan los documentos extras para reducir espacio
+                                if (path.exists("data/raw_data/datos_abiertos_covid19.zip")):
                                 os.remove("data/raw_data/datos_abiertos_covid19.zip")
 
-                            if (path.exists("data/raw_data/graph0-RAW.csv")):
+                                if (path.exists("data/raw_data/graph0-RAW.csv")):
                                 os.remove("data/raw_data/graph0-RAW.csv")
-                        </code>
-                    </pre>
+                            </code>
+                        </pre>
+
+                    </div>
                 </div>
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" style="margin-top: 3%; ">
                     <h4 style="text-align: left">
-                        <b>3.- Limpieza de datos y eliminación de información innecesaria</b>
+                        <b>3.- Limpieza y manejo de datos</b>
                     </h4>
                     <p style="font-size: 20px">
-                        Un vez que se han descargado los datos, estos se tienen en un formato en crudo, pues existen valores
-                        que no tienen información, asi como registros y columnas que no nos seran de utilidad para el fin establecido anteriormente.
-                        Se estara siguiendo un orden de depuracion decremental, para poder eliminar la mayor información posible desde el inicio.
+                        Un vez que se han descargado los datos, estos se tienen en un formato en crudo, se procedere a eliminar información innecesaria,
+                        pues existen valores y columnas que no nos seran de utilidad para el fin establecido anteriormente.
+                        Se estara siguiendo un orden de depuracion decremental(Mayor a menor), para poder eliminar la mayor información posible desde el inicio.
                         <br><br>
                         <b>&emsp;Paso 1: Eliminación y depuración de datos</b>
-                        Se eliminan las columnas inecesarias del dataset  <a href="" target="_blank">data_preparation.py</a>
+                        •Se eliminan las columnas inecesarias. <br>
+                        •Se filtran los valores que nos interesan (depunciones y casos positivos) <br>
+                        •Se eliminan duplicados <br>
+                        •Se convierte la columna de fechas en formato datetime <br>
                     </p>
+                    <button type="button" class="collapsible" style="text-align: center"><b>#VER CODIGO</b></button>
+                    <div class="content">
                     <pre>
                         <code>
+                            <p style="overflow: scroll">
                         def data_cleaning_g0(df_g0_raw,output_file):
                             # region Data_cleaning_g0
                             # Seleccionamos información requerida y se sustituyen valores no requeridos
@@ -207,10 +250,312 @@
 
                             return df_g0_raw
                             #endregion
+                            </p>
+                        </code>
+                    </pre>
+                    </div>
+                    <p style="font-size: 20px">
+                        <br><br>
+                        Se muestra el resultado y forma del data set despues del proceso de limpieza basico,
+                        teniendo 248,561 registros y 15 columnas.
+                    </p>
+                    <pre>
+                        <code>
+                            Pre eliminación de duplicados: (296188, 15)
+                            Duplicados:   47627
+                            Pos eliminación de duplicados: (248561, 15)
                         </code>
                     </pre>
                     <p style="font-size: 20px">
-                        <b>&emsp;Paso 2:</b>
+                        <b>&emsp;Paso 2: Creación del dataset tidy</b><br>
+                        Una vez que se genera el dataframe en limpio, se procede a generar un archivo con el dataset tidy.
+                        <br><b>Tidy Dataset: </b><a href="https://github.com/Silvertongue26/imss_dashboard_2/blob/master/data/tidy_data/graph0-gen_data_mx.csv" target="_blank">graph0-gen_data_mx.csv</a>
+                    </p>
+                    <button type="button" class="collapsible" style="text-align: center"><b>#VER EJEMPLO</b></button>
+                    <div class="content">
+                        <pre>
+                            <code style="overflow: scroll">
+                                <table cellspacing="0" border="0">
+                                    <colgroup width="33"></colgroup>
+                                    <colgroup width="50"></colgroup>
+                                    <colgroup width="77"></colgroup>
+                                    <colgroup width="84"></colgroup>
+                                    <colgroup width="49"></colgroup>
+                                    <colgroup width="80"></colgroup>
+                                    <colgroup width="50"></colgroup>
+                                    <colgroup width="51"></colgroup>
+                                    <colgroup width="83"></colgroup>
+                                    <colgroup width="112"></colgroup>
+                                    <colgroup width="87"></colgroup>
+                                    <colgroup width="134"></colgroup>
+                                    <colgroup width="82"></colgroup>
+                                    <colgroup width="124"></colgroup>
+                                    <colgroup width="101"></colgroup>
+                                    <colgroup width="160"></colgroup>
+                                    <tbody><tr>
+                                        <td height="17" align="left"><br></td>
+                                        <td align="left">SEXO</td>
+                                        <td align="left">FECHA_DEF</td>
+                                        <td align="left">NEUMONIA</td>
+                                        <td align="left">EDAD</td>
+                                        <td align="left">DIABETES</td>
+                                        <td align="left">EPOC</td>
+                                        <td align="left">ASMA</td>
+                                        <td align="left">INMUSUPR</td>
+                                        <td align="left">HIPERTENSION</td>
+                                        <td align="left">OTRA_COM</td>
+                                        <td align="left">CARDIOVASCULAR</td>
+                                        <td align="left">OBESIDAD</td>
+                                        <td align="left">RENAL_CRONICA</td>
+                                        <td align="left">TABAQUISMO</td>
+                                        <td align="left">CLASIFICACION_FINAL</td>
+                                    </tr>
+                                    <tr>
+                                        <td sdval="81" sdnum="1033;" height="17" align="right">81</td>
+                                        <td sdval="1" sdnum="1033;" align="right">1</td>
+                                        <td sdnum="1033;0;@" align="left">7/21/2020</td>
+                                        <td sdval="1" sdnum="1033;" align="right">1</td>
+                                        <td sdval="66" sdnum="1033;" align="right">66</td>
+                                        <td sdval="1" sdnum="1033;" align="right">1</td>
+                                        <td sdval="2" sdnum="1033;" align="right">2</td>
+                                        <td sdval="2" sdnum="1033;" align="right">2</td>
+                                        <td sdval="2" sdnum="1033;" align="right">2</td>
+                                        <td sdval="1" sdnum="1033;" align="right">1</td>
+                                        <td sdval="2" sdnum="1033;" align="right">2</td>
+                                        <td sdval="2" sdnum="1033;" align="right">2</td>
+                                        <td sdval="1" sdnum="1033;" align="right">1</td>
+                                        <td sdval="2" sdnum="1033;" align="right">2</td>
+                                        <td sdval="2" sdnum="1033;" align="right">2</td>
+                                        <td sdval="2" sdnum="1033;" align="right">2</td>
+                                    </tr>
+                                    <tr>
+                                        <td sdval="150" sdnum="1033;" height="17" align="right">150</td>
+                                        <td sdval="1" sdnum="1033;" align="right">1</td>
+                                        <td sdnum="1033;0;@" align="left">12/15/2020</td>
+                                        <td sdval="1" sdnum="1033;" align="right">1</td>
+                                        <td sdval="30" sdnum="1033;" align="right">30</td>
+                                        <td sdval="2" sdnum="1033;" align="right">2</td>
+                                        <td sdval="2" sdnum="1033;" align="right">2</td>
+                                        <td sdval="2" sdnum="1033;" align="right">2</td>
+                                        <td sdval="2" sdnum="1033;" align="right">2</td>
+                                        <td sdval="2" sdnum="1033;" align="right">2</td>
+                                        <td sdval="2" sdnum="1033;" align="right">2</td>
+                                        <td sdval="2" sdnum="1033;" align="right">2</td>
+                                        <td sdval="2" sdnum="1033;" align="right">2</td>
+                                        <td sdval="1" sdnum="1033;" align="right">1</td>
+                                        <td sdval="2" sdnum="1033;" align="right">2</td>
+                                        <td sdval="3" sdnum="1033;" align="right">3</td>
+                                    </tr>
+                                    <tr>
+                                        <td sdval="177" sdnum="1033;" height="17" align="right">177</td>
+                                        <td sdval="2" sdnum="1033;" align="right">2</td>
+                                        <td sdnum="1033;0;@" align="left">12/17/2020</td>
+                                        <td sdval="1" sdnum="1033;" align="right">1</td>
+                                        <td sdval="58" sdnum="1033;" align="right">58</td>
+                                        <td sdval="1" sdnum="1033;" align="right">1</td>
+                                        <td sdval="2" sdnum="1033;" align="right">2</td>
+                                        <td sdval="2" sdnum="1033;" align="right">2</td>
+                                        <td sdval="2" sdnum="1033;" align="right">2</td>
+                                        <td sdval="1" sdnum="1033;" align="right">1</td>
+                                        <td sdval="2" sdnum="1033;" align="right">2</td>
+                                        <td sdval="1" sdnum="1033;" align="right">1</td>
+                                        <td sdval="2" sdnum="1033;" align="right">2</td>
+                                        <td sdval="1" sdnum="1033;" align="right">1</td>
+                                        <td sdval="2" sdnum="1033;" align="right">2</td>
+                                        <td sdval="3" sdnum="1033;" align="right">3</td>
+                                    </tr>
+                                    <tr>
+                                        <td sdval="254" sdnum="1033;" height="17" align="right">254</td>
+                                        <td sdval="1" sdnum="1033;" align="right">1</td>
+                                        <td sdnum="1033;0;@" align="left">8/20/2020</td>
+                                        <td sdval="2" sdnum="1033;" align="right">2</td>
+                                        <td sdval="32" sdnum="1033;" align="right">32</td>
+                                        <td sdval="2" sdnum="1033;" align="right">2</td>
+                                        <td sdval="2" sdnum="1033;" align="right">2</td>
+                                        <td sdval="2" sdnum="1033;" align="right">2</td>
+                                        <td sdval="2" sdnum="1033;" align="right">2</td>
+                                        <td sdval="2" sdnum="1033;" align="right">2</td>
+                                        <td sdval="2" sdnum="1033;" align="right">2</td>
+                                        <td sdval="2" sdnum="1033;" align="right">2</td>
+                                        <td sdval="2" sdnum="1033;" align="right">2</td>
+                                        <td sdval="2" sdnum="1033;" align="right">2</td>
+                                        <td sdval="2" sdnum="1033;" align="right">2</td>
+                                        <td sdval="3" sdnum="1033;" align="right">3</td>
+                                    </tr>
+                                    <tr>
+                                        <td sdval="273" sdnum="1033;" height="17" align="right">273</td>
+                                        <td sdval="1" sdnum="1033;" align="right">1</td>
+                                        <td sdnum="1033;0;@" align="left">8/21/2020</td>
+                                        <td sdval="1" sdnum="1033;" align="right">1</td>
+                                        <td sdval="24" sdnum="1033;" align="right">24</td>
+                                        <td sdval="2" sdnum="1033;" align="right">2</td>
+                                        <td sdval="2" sdnum="1033;" align="right">2</td>
+                                        <td sdval="1" sdnum="1033;" align="right">1</td>
+                                        <td sdval="2" sdnum="1033;" align="right">2</td>
+                                        <td sdval="2" sdnum="1033;" align="right">2</td>
+                                        <td sdval="2" sdnum="1033;" align="right">2</td>
+                                        <td sdval="2" sdnum="1033;" align="right">2</td>
+                                        <td sdval="1" sdnum="1033;" align="right">1</td>
+                                        <td sdval="2" sdnum="1033;" align="right">2</td>
+                                        <td sdval="2" sdnum="1033;" align="right">2</td>
+                                        <td sdval="3" sdnum="1033;" align="right">3</td>
+                                    </tr>
+                                </tbody></table>
+                            </code>
+                        </pre>
+                    </div>
+                    <br><br>
+                    <p style="font-size: 20px">
+                        <b>&emsp;Paso 3: Creación del diccionario de datos</b><br>
+                        Una vez que se genera el dataframe en limpio, se porcede a generar un archivo con el dataset tidy.
+                        <br><b>Diccionario de datos: </b><a href="https://github.com/Silvertongue26/imss_dashboard_2/blob/master/data/diccionarios_data/Diccionario_g0.xlsx" target="_blank">Diccionarios_g0.xlsx</a>
+                    </p>
+                    <button type="button" class="collapsible" style="text-align: center"><b>#VER DICCIONARIO</b></button>
+                    <div class="content">
+                    <pre>
+                        <code>
+                            <p style="overflow: scroll">
+                                <table cellspacing="0" border="0">
+                                <colgroup width="22"></colgroup>
+                                <colgroup width="269"></colgroup>
+                                <colgroup width="272"></colgroup>
+                                <colgroup width="398"></colgroup>
+                                <tbody><tr>
+                                    <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" valign="middle" height="19" bgcolor="#FFFFFF" align="center"><b><font face="Calibri Light" color="#000000">Nº</font></b></td>
+                                    <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" valign="middle" bgcolor="#FFFFFF" align="center"><b><font face="Calibri Light" color="#000000">NOMBRE DE VARIABLE</font></b></td>
+                                    <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" valign="middle" bgcolor="#FFFFFF" align="center"><b><font face="Calibri Light">DESCRIPCIÓN DE VARIABLE</font></b></td>
+                                    <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" valign="middle" bgcolor="#FFFFFF" align="center"><b><font face="Calibri Light" color="#000000">FORMATO O FUENTE</font></b></td>
+                                </tr>
+                                <tr>
+                                    <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" sdval="1" sdnum="1033;" valign="middle" height="121" bgcolor="#FFFFFF" align="center"><b><font face="Calibri Light" color="#000000">1</font></b></td>
+                                    <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" valign="middle" bgcolor="#FFFFFF" align="center"><font face="Calibri Light" color="#000000">SEXO</font></td>
+                                    <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" valign="middle" bgcolor="#FFFFFF" align="center"><font size="1" face="Calibri Light">Identifica al sexo del paciente.</font></td>
+                                    <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" valign="middle" bgcolor="#FFFFFF" align="left"><font face="Calibri Light" color="#000000">1	 - MUJER<br>2	 - HOMBRE<br>99	 - NO ESPECIFICADO</font></td>
+                                </tr>
+                                <tr>
+                                    <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" sdval="2" sdnum="1033;" valign="middle" height="19" bgcolor="#FFFFFF" align="center"><b><font face="Calibri Light" color="#000000">2</font></b></td>
+                                    <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" valign="middle" bgcolor="#FFFFFF" align="center"><font face="Calibri Light" color="#000000">FECHA_DEF</font></td>
+                                    <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" valign="middle" bgcolor="#FFFFFF" align="center"><font size="1" face="Calibri Light">Identifica la fecha en que el paciente falleció.</font></td>
+                                    <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" valign="middle" bgcolor="#FFFFFF" align="center"><font face="Calibri Light" color="#000000">AAAA-MM-DD</font></td>
+                                </tr>
+                                <tr>
+                                    <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" sdval="3" sdnum="1033;" valign="middle" height="87" bgcolor="#FFFFFF" align="center"><b><font face="Calibri Light" color="#000000">3</font></b></td>
+                                    <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" valign="middle" bgcolor="#FFFFFF" align="center"><font face="Calibri Light" color="#000000">NEUMONIA</font></td>
+                                    <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" valign="middle" bgcolor="#FFFFFF" align="center"><font size="1" face="Calibri Light">Identifica si al paciente se le diagnosticó con neumonía.</font></td>
+                                    <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" valign="middle" bgcolor="#FFFFFF" align="left"><font face="Calibri Light" color="#000000">1 - 	SI <br>2 - 	NO <br>97 - 	NO APLICA<br>98 - 	SE IGNORA<br>99 - 	NO ESPECIFICADO</font></td>
+                                </tr>
+                                <tr>
+                                    <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" sdval="4" sdnum="1033;" valign="middle" height="19" bgcolor="#FFFFFF" align="center"><b><font face="Calibri Light" color="#000000">4</font></b></td>
+                                    <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" valign="middle" bgcolor="#FFFFFF" align="center"><font face="Calibri Light" color="#000000">EDAD</font></td>
+                                    <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" valign="middle" bgcolor="#FFFFFF" align="center"><font size="1" face="Calibri Light">Identifica la edad del paciente.</font></td>
+                                    <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" valign="middle" bgcolor="#FFFFFF" align="center"><font face="Calibri Light" color="#000000">NÚMERICO</font></td>
+                                </tr>
+                                <tr>
+                                    <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" sdval="5" sdnum="1033;" valign="middle" height="87" bgcolor="#FFFFFF" align="center"><b><font face="Calibri Light" color="#000000">5</font></b></td>
+                                    <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" valign="middle" bgcolor="#FFFFFF" align="center"><font face="Calibri Light" color="#000000">DIABETES</font></td>
+                                    <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" valign="middle" bgcolor="#FFFFFF" align="center"><font size="1" face="Calibri Light">Identifica si el paciente tiene un diagnóstico de diabetes. </font></td>
+                                    <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" valign="middle" bgcolor="#FFFFFF" align="left"><font face="Calibri Light" color="#000000">1 - 	SI <br>2 - 	NO <br>97 - 	NO APLICA<br>98 - 	SE IGNORA<br>99 - 	NO ESPECIFICADO</font></td>
+                                </tr>
+                                <tr>
+                                    <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" sdval="6" sdnum="1033;" valign="middle" height="87" bgcolor="#FFFFFF" align="center"><b><font face="Calibri Light" color="#000000">6</font></b></td>
+                                    <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" valign="middle" bgcolor="#FFFFFF" align="center"><font face="Calibri Light" color="#000000">EPOC</font></td>
+                                    <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" valign="middle" bgcolor="#FFFFFF" align="center"><font size="1" face="Calibri Light">Identifica si el paciente tiene un diagnóstico de EPOC. </font></td>
+                                    <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" valign="middle" bgcolor="#FFFFFF" align="left"><font face="Calibri Light" color="#000000">1 - 	SI <br>2 - 	NO <br>97 - 	NO APLICA<br>98 - 	SE IGNORA<br>99 - 	NO ESPECIFICADO</font></td>
+                                </tr>
+                                <tr>
+                                    <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" sdval="7" sdnum="1033;" valign="middle" height="87" bgcolor="#FFFFFF" align="center"><b><font face="Calibri Light" color="#000000">7</font></b></td>
+                                    <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" valign="middle" bgcolor="#FFFFFF" align="center"><font face="Calibri Light" color="#000000">ASMA</font></td>
+                                    <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" valign="middle" bgcolor="#FFFFFF" align="center"><font size="1" face="Calibri Light">Identifica si el paciente tiene un diagnóstico de asma. </font></td>
+                                    <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" valign="middle" bgcolor="#FFFFFF" align="left"><font face="Calibri Light" color="#000000">1 - 	SI <br>2 - 	NO <br>97 - 	NO APLICA<br>98 - 	SE IGNORA<br>99 - 	NO ESPECIFICADO</font></td>
+                                </tr>
+                                <tr>
+                                    <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" sdval="8" sdnum="1033;" valign="middle" height="87" bgcolor="#FFFFFF" align="center"><b><font face="Calibri Light" color="#000000">8</font></b></td>
+                                    <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" valign="middle" bgcolor="#FFFFFF" align="center"><font face="Calibri Light" color="#000000">INMUSUPR</font></td>
+                                    <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" valign="middle" bgcolor="#FFFFFF" align="center"><font size="1" face="Calibri Light">Identifica si el paciente presenta inmunosupresión.</font></td>
+                                    <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" valign="middle" bgcolor="#FFFFFF" align="left"><font face="Calibri Light" color="#000000">1 - 	SI <br>2 - 	NO <br>97 - 	NO APLICA<br>98 - 	SE IGNORA<br>99 - 	NO ESPECIFICADO</font></td>
+                                </tr>
+                                <tr>
+                                    <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" sdval="9" sdnum="1033;" valign="middle" height="87" bgcolor="#FFFFFF" align="center"><b><font face="Calibri Light" color="#000000">9</font></b></td>
+                                    <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" valign="middle" bgcolor="#FFFFFF" align="center"><font face="Calibri Light" color="#000000">HIPERTENSION</font></td>
+                                    <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" valign="middle" bgcolor="#FFFFFF" align="center"><font size="1" face="Calibri Light">Identifica si el paciente tiene un diagnóstico de hipertensión. </font></td>
+                                    <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" valign="middle" bgcolor="#FFFFFF" align="left"><font face="Calibri Light" color="#000000">1 - 	SI <br>2 - 	NO <br>97 - 	NO APLICA<br>98 - 	SE IGNORA<br>99 - 	NO ESPECIFICADO</font></td>
+                                </tr>
+                                <tr>
+                                    <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" sdval="10" sdnum="1033;" valign="middle" height="87" bgcolor="#FFFFFF" align="center"><b><font face="Calibri Light" color="#000000">10</font></b></td>
+                                    <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" valign="middle" bgcolor="#FFFFFF" align="center"><font face="Calibri Light" color="#000000">OTRAS_COM</font></td>
+                                    <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" valign="middle" bgcolor="#FFFFFF" align="center"><font size="1" face="Calibri Light">Identifica si el paciente tiene diagnóstico de otras enfermedades.</font></td>
+                                    <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" valign="middle" bgcolor="#FFFFFF" align="left"><font face="Calibri Light" color="#000000">1 - 	SI <br>2 - 	NO <br>97 - 	NO APLICA<br>98 - 	SE IGNORA<br>99 - 	NO ESPECIFICADO</font></td>
+                                </tr>
+                                <tr>
+                                    <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" sdval="11" sdnum="1033;" valign="middle" height="87" bgcolor="#FFFFFF" align="center"><b><font face="Calibri Light" color="#000000">11</font></b></td>
+                                    <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" valign="middle" bgcolor="#FFFFFF" align="center"><font face="Calibri Light" color="#000000">CARDIOVASCULAR</font></td>
+                                    <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" valign="middle" bgcolor="#FFFFFF" align="center"><font size="1" face="Calibri Light">Identifica si el paciente tiene un diagnóstico de enfermedades cardiovasculares. </font></td>
+                                    <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" valign="middle" bgcolor="#FFFFFF" align="left"><font face="Calibri Light" color="#000000">1 - 	SI <br>2 - 	NO <br>97 - 	NO APLICA<br>98 - 	SE IGNORA<br>99 - 	NO ESPECIFICADO</font></td>
+                                </tr>
+                                <tr>
+                                    <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" sdval="12" sdnum="1033;" valign="middle" height="87" bgcolor="#FFFFFF" align="center"><b><font face="Calibri Light" color="#000000">12</font></b></td>
+                                    <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" valign="middle" bgcolor="#FFFFFF" align="center"><font face="Calibri Light" color="#000000">OBESIDAD</font></td>
+                                    <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" valign="middle" bgcolor="#FFFFFF" align="center"><font size="1" face="Calibri Light">Identifica si el paciente tiene diagnóstico de obesidad.</font></td>
+                                    <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" valign="middle" bgcolor="#FFFFFF" align="left"><font face="Calibri Light" color="#000000">1 - 	SI <br>2 - 	NO <br>97 - 	NO APLICA<br>98 - 	SE IGNORA<br>99 - 	NO ESPECIFICADO</font></td>
+                                </tr>
+                                <tr>
+                                    <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" sdval="13" sdnum="1033;" valign="middle" height="87" bgcolor="#FFFFFF" align="center"><b><font face="Calibri Light" color="#000000">13</font></b></td>
+                                    <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" valign="middle" bgcolor="#FFFFFF" align="center"><font face="Calibri Light" color="#000000">RENAL_CRONICA</font></td>
+                                    <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" valign="middle" bgcolor="#FFFFFF" align="center"><font size="1" face="Calibri Light">Identifica si el paciente tiene diagnóstico de insuficiencia renal crónica.</font></td>
+                                    <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" valign="middle" bgcolor="#FFFFFF" align="left"><font face="Calibri Light" color="#000000">1 - 	SI <br>2 - 	NO <br>97 - 	NO APLICA<br>98 - 	SE IGNORA<br>99 - 	NO ESPECIFICADO</font></td>
+                                </tr>
+                                <tr>
+                                    <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" sdval="14" sdnum="1033;" valign="middle" height="87" bgcolor="#FFFFFF" align="center"><b><font face="Calibri Light" color="#000000">14</font></b></td>
+                                    <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" valign="middle" bgcolor="#FFFFFF" align="center"><font face="Calibri Light" color="#000000">TABAQUISMO</font></td>
+                                    <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" valign="middle" bgcolor="#FFFFFF" align="center"><font size="1" face="Calibri Light">Identifica si el paciente tiene hábito de tabaquismo.</font></td>
+                                    <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" valign="middle" bgcolor="#FFFFFF" align="left"><font face="Calibri Light" color="#000000">1 - 	SI <br>2 - 	NO <br>97 - 	NO APLICA<br>98 - 	SE IGNORA<br>99 - 	NO ESPECIFICADO</font></td>
+                                </tr>
+                                <tr>
+                                    <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" sdval="15" sdnum="1033;" valign="middle" height="87" bgcolor="#FFFFFF" align="center"><b><font face="Calibri Light" color="#000000">15</font></b></td>
+                                    <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" valign="middle" bgcolor="#FFFFFF" align="center"><font face="Calibri Light" color="#000000">CLASIFICACION_FINAL</font></td>
+                                    <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" valign="middle" bgcolor="#FFFFFF" align="center"><font size="1" face="Calibri Light">Identifica si el paciente es un caso de COVID-19 según el catálogo "CLASIFICACION_FINAL".</font></td>
+                                    <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" valign="middle" bgcolor="#FFFFFF" align="left"><font face="Calibri Light" color="#000000">1	 - CASO DE COVID-19 CONFIRMADO POR ASOCIACIÓN CLÍNICA EPIDEMIOLÓGICA<br>2	 - CASO DE COVID-19 CONFIRMADO POR COMITÉ DE  DICTAMINACIÓN<br>3	 - CASO DE SARS-COV-2  CONFIRMADO</font></td>
+                                </tr>
+                            </tbody></table>
+                            </p>
+                        </code>
+                    </pre>
+                    </div>
+                    <p style="font-size: 20px">
+                        <br>
+                        <b>&emsp;Paso 4: Detección y manejo de outliers</b><br>
+                        Se realiza una analisis de outlieres en general sobre las columnas que se han seleccionado para
+                        determinar correlaciones entre ellas y encontrar outliers.
+
+                        En una vista general se pueden observar la constancia de los valores para las columnas en general a excepcion de
+                        EDAD y ClASIFICACION_FINAL
+                        <img src="" style="width:100%" alt="">
+                    </p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    <p style="font-size: 20px">
+                        <br>
+                        <b>&emsp;Paso NEXT: Detección y manejo de outliers</b><br>
                         Se realiza un analisis exploratorio de la estructura del dataframe para poder determinar el tipo
                         de información y si existen datos repetidos para asi poder determinar las futuras acciones
                     </p>
@@ -256,13 +601,14 @@
                         <br><br>
                         Por motivos de ahorro de espacio en Github o el servidor, se realiza una validación para determinar la existencia de un dataset
                         crudo, en caso de que no exista exista, se procede a descargar y descomprimir el dataset en crudo y una vez terminado este proceso,
-                        se eliminan los documentos que ya no se utilizarán. <br><b>Archivo:</b> <a href="" target="_blank">data_preparation.py</a>
+                        se eliminan los documentos que ya no se utilizarán. <br><b>Archivo:</b> <a href="https://github.com/Silvertongue26/imss_dashboard_2/blob/master/data_preparation.py" target="_blank">data_preparation.py</a>
                     </p>
                     <pre>
                         <code>
                         #Descarga el dataset
                         if(path.exists("data/raw_data/graph0-RAW.csv") == False):
-                            wget.download('https://datosabiertos.salud.gob.mx/gobmx/salud/datos_abiertos/datos_abiertos_covid19.zip', "data/raw_data" )
+                            wget.download('https://datosabiertos.salud.gob.mx/gobmx/salud/datos_abiertos/datos_abiertos_covid19.zip',
+                            "data/raw_data" )
                             with ZipFile("data/raw_data/datos_abiertos_covid19.zip", 'r') as zip:
                                 #Muestra los contenidos del archivo zip
                                 zip.printdir()
@@ -293,6 +639,22 @@
 
     </div>
 </body>
+<script>
+    var coll = document.getElementsByClassName("collapsible");
+    var i;
+
+    for (i = 0; i < coll.length; i++) {
+      coll[i].addEventListener("click", function() {
+        this.classList.toggle("active");
+        var content = this.nextElementSibling;
+        if (content.style.display === "block") {
+          content.style.display = "none";
+        } else {
+          content.style.display = "block";
+        }
+      });
+    }
+</script>
 <footer data-v-58f74857="" data-v-713a81f3="" class="panel-footer" style="padding-bottom: 0; background: #12322B">
     <div data-v-58f74857="" class="container" style="padding-bottom: 30px">
         <div data-v-58f74857="" class="row">
