@@ -6,3 +6,4 @@ seaborn
 pandas_profiling
 sweetviz
 wget
+sklearn
