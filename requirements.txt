@@ -3,3 +3,4 @@ pandas==1.2.4
 plotly
 dash_bootstrap_components
 seaborn
+pandas_profiling
