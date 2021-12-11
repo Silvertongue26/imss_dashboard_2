@@ -527,38 +527,105 @@
                         Se realiza una analisis de outlieres en general sobre las columnas que se han seleccionado para
                         determinar correlaciones entre ellas y encontrar outliers.
 
-                        En una vista general se pueden observar la constancia de los valores para las columnas en general a excepcion de
-                        EDAD y ClASIFICACION_FINAL
-                        <img src="" style="width:100%" alt="">
+                        En una vista general se puede observar la constancia de los valores en la mayoria de las columnas,
+                        que no presentan anomalias a considerar a excepción de EDAD y CLASIFICACION_FINAL, las cuales presentan una distribución
+                        interesante entre las 3 principales clasificaciónes y la distribución por edad.
+                        <br>
+                        <br>
+                        <img src="https://raw.githubusercontent.com/Silvertongue26/imss_dashboard_2/master/data/assets/g0/pairplot_0.png" style="width:100%" alt="">
+                        <p style="text-align: center"><i>Figura 1</i></p>
                     </p>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                </div>
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" style="margin-top: 3%; ">
                     <p style="font-size: 20px">
                         <br>
-                        <b>&emsp;Paso NEXT: Detección y manejo de outliers</b><br>
-                        Se realiza un analisis exploratorio de la estructura del dataframe para poder determinar el tipo
-                        de información y si existen datos repetidos para asi poder determinar las futuras acciones
+                        En la figura 2 y 3 se puede observar un poco mas a fondo lo sgrupos generados por la distribución
+                        de edad y el resto de los outliers.
+                        <br>
+                        <br>
                     </p>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12" style="margin-top: 3%; ">
+                    <img src="https://github.com/Silvertongue26/imss_dashboard_2/blob/master/data/assets/g0/pairplot_1.png?raw=true" style="width: 100%" alt="">
+                    <p style="text-align: center"><i>Figura 2</i></p>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12" style="margin-top: 3%; ">
+                    <img src="https://github.com/Silvertongue26/imss_dashboard_2/blob/master/data/assets/g0/pairplot_2.png?raw=true" style="width: 100%" alt="">
+                    <p style="text-align: center"><i>Figura 3</i></p>
+                </div>
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" style="margin-top: 3%; ">
+                    <button type="button" class="collapsible" style="text-align: center"><b>#VER CODIGO</b></button>
+                    <div class="content">
+                    <pre>
+                        <code>
+                            <p style="overflow: scroll">
+                                g = sns.pairplot(df_g0, x_vars=["EDAD", "CLASIFICACION_FINAL"],
+                                    y_vars=["EDAD", "CLASIFICACION_FINAL"], corner=True,  diag_kind="kde"
+                                )
+                                g.map_lower(sns.kdeplot, levels=4, color=".2")
+                                plt.savefig('data/assets/g0/pairplot.png')
+                            </p>
+                        </code>
+                    </pre>
+                    </div>
+                </div>
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" style="margin-top: 3%; ">
+                    <p style="font-size: 20px">
+                        <br>
+                        Analizando la información directamente desde el archivo csv, se puede determinar que los valores tablecidos como outliers
+                        son valores perfectamente normales, solo que se precentan fuera del rango debido a la alta o baja edad, por lo que se
+                        determina el no eliminarlos del dataset.
+                        <br>
+                        <br>
+                    </p>
+                </div>
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" style="margin-top: 3%; ">
+                    <h4 style="text-align: left">
+                        <b>4.- Visualización de la información</b>
+                    </h4>
+                    <p style="font-size: 20px">
+                        En esta sección se estara aplicando el metodo PCA enfocado a la visualización de información en este dataset.<br>
+                        El metodo de Análisis de Componentes Principales o PCA es un método estadístico que permite simplificar
+                        la complejidad de espacios muestrales con muchas dimensiones a la vez que conserva su información.
+                        <br><br>
+                    </p>
+                    <!--
+                    <button type="button" class="collapsible" style="text-align: center"><b>#VER VARIANCIAS</b></button>
+                    <div class="content">
+                        <pre>
+                            <code style="overflow: scroll">
+                                [1.48323287e+13, 4.79563655e+02, 2.29739732e+02, 4.82998665e+01, 1.74996081e+01, 1.41255957e+01]
+                            </code>
+                        </pre>
+                    </div>
+                    -->
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12" style="margin-top: 3%; ">
+                    <img src="https://github.com/Silvertongue26/imss_dashboard_2/blob/master/data/assets/g0/pairplot_1.png?raw=true" style="width: 100%" alt="">
+                    <p style="text-align: center"><i>Figura 2</i></p>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12" style="margin-top: 3%; ">
+                    <img src="https://github.com/Silvertongue26/imss_dashboard_2/blob/master/data/assets/g0/pairplot_2.png?raw=true" style="width: 100%" alt="">
+                    <p style="text-align: center"><i>Figura 3</i></p>
+                </div>
+
+
+
+
+
+
+
+
+
+
+
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" style="margin-top: 3%; ">
+                    <p style="font-size: 20px">
+                                        <br>
+                                        <b>&emsp;Paso NEXT: Detección y manejo de outliers</b><br>
+                                        Se realiza un analisis exploratorio de la estructura del dataframe para poder determinar el tipo
+                                        de información y si existen datos repetidos para asi poder determinar las futuras acciones
+                                    </p>
                     <pre>
                         <code>
                             Forma del dataframe: (295313, 16)
@@ -585,11 +652,6 @@
                         </code>
                     </pre>
                 </div>
-
-
-
-
-
 
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" style="margin-top: 3%; ">
                     <h4 style="text-align: left">

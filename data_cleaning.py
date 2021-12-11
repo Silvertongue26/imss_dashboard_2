@@ -62,7 +62,6 @@ def data_cleaning_g0(df_g0_raw,output_file):
 
 def outlier_detection_g0(df_g0):
     print("******************* STARTING OUTLIERS g0 *******************")
-
     g = sns.pairplot(df_g0, x_vars=["EDAD", "CLASIFICACION_FINAL"],
                      y_vars=["EDAD", "CLASIFICACION_FINAL"], corner=True,  diag_kind="kde"
                  )
