@@ -7,6 +7,7 @@ import data_cleaning as dtc
 import data_visualization as dtv
 import EDA
 import gunicorn
+import pandas as pd
 
 import dash_bootstrap_components as dbc
 import dash
@@ -149,14 +150,115 @@ BODY - BEGINS
 """
 #df_g0 = dtp.data_preparation_g0()
 ###ELIMINAR
-df_g0 = dtp.data_preparation_g0()
-#df_g0 = pd.read_csv("data/tidy_data/graph0-gen_data_mx.csv")
+#df_g0 = dtp.data_preparation_g0()
+df_g0 = pd.read_csv("data/tidy_data/graph0-gen_data_mx.csv")
 #df_g0 = dtc.data_cleaning_g0(df_g0, "graph0-gen_data_mx.csv")
 
 #dtc.outlier_detection_g0(df_g0)
 #dtv.data_visualization_g0(df_g0)
-EDA.data_eda_g0(df_g0)
+#EDA.data_eda_g0(df_g0)
 
+
+import plotly.graph_objects as go
+df_g0.drop(df_g0.filter(regex="Unname"), axis=1, inplace=True)
+df_g0_sum = df_g0.groupby(['FECHA_DEF']).sum()
+dates = df_g0['FECHA_DEF'].unique()
+df = {'FECHA_DEF': dates}
+dates_df = pd.DataFrame(df)
+dates_df.sort_values(by='FECHA_DEF', inplace=True, ascending=True)
+df_g0_sum.insert(0, 'FECHA_DEF', dates_df["FECHA_DEF"].values)
+
+
+fig = go.Figure()
+fig.add_trace(go.Scatter(y=list(df_g0_sum.NEUMONIA), x=list(df_g0_sum.FECHA_DEF),
+                         mode='lines',
+                         name='Neumonia'
+                         ))
+fig.add_trace(go.Scatter(y=list(df_g0_sum.DIABETES), x=list(df_g0_sum.FECHA_DEF),
+                         mode='lines',
+                         name='Diabetes'
+                         ))
+fig.add_trace(go.Scatter(y=list(df_g0_sum.EPOC), x=list(df_g0_sum.FECHA_DEF),
+                         mode='lines',
+                         name='EPOC'
+                         ))
+fig.add_trace(go.Scatter(y=list(df_g0_sum.ASMA), x=list(df_g0_sum.FECHA_DEF),
+                         mode='lines',
+                         name='Asma'
+                         ))
+fig.add_trace(go.Scatter(y=list(df_g0_sum.INMUSUPR), x=list(df_g0_sum.FECHA_DEF),
+                         mode='lines',
+                         name='Inmunosupresión'
+                         ))
+fig.add_trace(go.Scatter(y=list(df_g0_sum.HIPERTENSION), x=list(df_g0_sum.FECHA_DEF),
+                         mode='lines',
+                         name='Hipertensión'
+                         ))
+fig.add_trace(go.Scatter(y=list(df_g0_sum.CARDIOVASCULAR), x=list(df_g0_sum.FECHA_DEF),
+                         mode='lines',
+                         name='P. Cardiovasculares'
+                         ))
+fig.add_trace(go.Scatter(y=list(df_g0_sum.OBESIDAD), x=list(df_g0_sum.FECHA_DEF),
+                         mode='lines',
+                         name='Obesidad'
+                         ))
+fig.add_trace(go.Scatter(y=list(df_g0_sum.RENAL_CRONICA), x=list(df_g0_sum.FECHA_DEF),
+                         mode='lines',
+                         name='P. Renales'
+                         ))
+fig.add_trace(go.Scatter(y=list(df_g0_sum.TABAQUISMO), x=list(df_g0_sum.FECHA_DEF),
+                         mode='lines',
+                         name='Tabaquismo'
+                         ))
+fig.add_trace(go.Scatter(y=list(df_g0_sum.OTRA_COM), x=list(df_g0_sum.FECHA_DEF),
+                         mode='lines',
+                         name='Otros'
+                         ))
+
+
+
+fig.update_layout(
+    title="Influencia de comorbilidades en decesos",
+    yaxis=dict(
+        title="Decesos"
+    ),
+    # Add range slider
+    xaxis=dict(
+        title="Fechas",
+        rangeselector = dict(
+            buttons = list([
+                dict(
+                    count = 1,
+                    label = "Último mes",
+                    step = "month",
+                    stepmode = "backward"
+                ),
+                dict(
+                    count = 6,
+                    label = "Últimos 6 meses",
+                    step = "month",
+                    stepmode = "backward"
+                ),
+                dict(count=1,
+                     label = "Último año",
+                     step = "year",
+                     stepmode = "backward"
+                ),
+                dict(
+                    count = 1,
+                    label = "Todo",
+                    step = "all"
+                )
+            ])
+        ),
+        rangeslider = dict(visible=True),
+        type = "date"
+    ),
+    hovermode='x'
+)
+
+fig.show()
+fig.write_image('data/assets/g0/graph_g0.png')
 """
 df_g0_sum = df_g0.groupby('FECHA_DEF').sum()
 dtc.outlier_detection_g0(df_g0_sum)
