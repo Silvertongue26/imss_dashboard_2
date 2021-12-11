@@ -5,3 +5,4 @@ dash_bootstrap_components
 seaborn
 pandas_profiling
 sweetviz
+wget
