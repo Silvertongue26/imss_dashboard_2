@@ -148,129 +148,35 @@ NAVIGATION BARS - END
 """
 BODY - BEGINS
 """
-#df_g0 = dtp.data_preparation_g0()
-###ELIMINAR
-#df_g0 = dtp.data_preparation_g0()
-df_g0 = pd.read_csv("data/tidy_data/graph0-gen_data_mx.csv")
-#df_g0 = dtc.data_cleaning_g0(df_g0, "graph0-gen_data_mx.csv")
 
+"""INICIO PARA DESCOMENTAR PARA PROYECTO FINAL"""
+#df_g0 = dtp.data_preparation_g0()
+#df_g0 = dtc.data_cleaning_g0(df_g0, "graph0-gen_data_mx.csv")
 #dtc.outlier_detection_g0(df_g0)
 #dtv.data_visualization_g0(df_g0)
 #EDA.data_eda_g0(df_g0)
+"""FIN PARA DESCOMENTAR PARA PROYECTO FINAL"""
 
-"""
+
 import plotly.graph_objects as go
-df_g0.drop(df_g0.filter(regex="Unname"), axis=1, inplace=True)
-df_g0_sum = df_g0.groupby(['FECHA_DEF']).sum()
-dates = df_g0['FECHA_DEF'].unique()
-df = {'FECHA_DEF': dates}
-dates_df = pd.DataFrame(df)
-dates_df.sort_values(by='FECHA_DEF', inplace=True, ascending=True)
-df_g0_sum.insert(0, 'FECHA_DEF', dates_df["FECHA_DEF"].values)
-
-
-fig = go.Figure()
-fig.add_trace(go.Scatter(y=list(df_g0_sum.NEUMONIA), x=list(df_g0_sum.FECHA_DEF),
-                         mode='lines',
-                         name='Neumonia'
-                         ))
-fig.add_trace(go.Scatter(y=list(df_g0_sum.DIABETES), x=list(df_g0_sum.FECHA_DEF),
-                         mode='lines',
-                         name='Diabetes'
-                         ))
-fig.add_trace(go.Scatter(y=list(df_g0_sum.EPOC), x=list(df_g0_sum.FECHA_DEF),
-                         mode='lines',
-                         name='EPOC'
-                         ))
-fig.add_trace(go.Scatter(y=list(df_g0_sum.ASMA), x=list(df_g0_sum.FECHA_DEF),
-                         mode='lines',
-                         name='Asma'
-                         ))
-fig.add_trace(go.Scatter(y=list(df_g0_sum.INMUSUPR), x=list(df_g0_sum.FECHA_DEF),
-                         mode='lines',
-                         name='Inmunosupresión'
-                         ))
-fig.add_trace(go.Scatter(y=list(df_g0_sum.HIPERTENSION), x=list(df_g0_sum.FECHA_DEF),
-                         mode='lines',
-                         name='Hipertensión'
-                         ))
-fig.add_trace(go.Scatter(y=list(df_g0_sum.CARDIOVASCULAR), x=list(df_g0_sum.FECHA_DEF),
-                         mode='lines',
-                         name='P. Cardiovasculares'
-                         ))
-fig.add_trace(go.Scatter(y=list(df_g0_sum.OBESIDAD), x=list(df_g0_sum.FECHA_DEF),
-                         mode='lines',
-                         name='Obesidad'
-                         ))
-fig.add_trace(go.Scatter(y=list(df_g0_sum.RENAL_CRONICA), x=list(df_g0_sum.FECHA_DEF),
-                         mode='lines',
-                         name='P. Renales'
-                         ))
-fig.add_trace(go.Scatter(y=list(df_g0_sum.TABAQUISMO), x=list(df_g0_sum.FECHA_DEF),
-                         mode='lines',
-                         name='Tabaquismo'
-                         ))
-fig.add_trace(go.Scatter(y=list(df_g0_sum.OTRA_COM), x=list(df_g0_sum.FECHA_DEF),
-                         mode='lines',
-                         name='Otros'
-                         ))
 
 
 
-fig.update_layout(
-    title="Influencia de comorbilidades en decesos",
-    yaxis=dict(
-        title="Decesos"
-    ),
-    # Add range slider
-    xaxis=dict(
-        title="Fechas",
-        rangeselector = dict(
-            buttons = list([
-                dict(
-                    count = 1,
-                    label = "Último mes",
-                    step = "month",
-                    stepmode = "backward"
-                ),
-                dict(
-                    count = 6,
-                    label = "Últimos 6 meses",
-                    step = "month",
-                    stepmode = "backward"
-                ),
-                dict(count=1,
-                     label = "Último año",
-                     step = "year",
-                     stepmode = "backward"
-                ),
-                dict(
-                    count = 1,
-                    label = "Todo",
-                    step = "all"
-                )
-            ])
-        ),
-        rangeslider = dict(visible=True),
-        type = "date"
-    ),
-    hovermode='x'
-)
 
-fig.show()
-fig.write_image('data/assets/g0/graph_g0.png')
-
-"""
 """
 df_g0_sum = df_g0.groupby('FECHA_DEF').sum()
 dtc.outlier_detection_g0(df_g0_sum)
 EDA.data_eda_g0(df_g0_sum)
 """
-
+fig_g0 = dtp.data_presentation_g0()
 df_g1 = dtp.data_preparation_g1()
 fig_g1 = dtp.data_manipulation_g1(df_g1)
 df_g2 = dtp.data_preparation_g2()
 fig_g2 = dtp.data_manipulation_g2(df_g2)
+df_g3 = dtp.data_preparation_g3()
+fig_g3 = dtp.data_manipulation_g3(df_g3)
+df_g4 = dtp.data_preparation_g4()
+fig_g4 = dtp.data_manipulation_g4(df_g4)
 
 
 
@@ -344,7 +250,7 @@ body = dbc.Container([
                         html.H3(["Avance de vacunación del personal IMSS"], style={"textAlign":"center"}),
                         html.P("En esta gráfica se muestra el avance de vacunación del personal laboral del IMSS incluyendo "
                                "personal médico y administrativo."),
-                        #html.Div([dcc.Graph(figure=fig2)])
+                        html.Div([dcc.Graph(figure=fig_g2)])
                     ], className='col-xl-12 col-lg-12 col-md-12 col-sm-12',
                     ),
                 ])],
@@ -366,7 +272,7 @@ body = dbc.Container([
                                " lo cual es crítico para mejorar el desarrollo de protocolos de diagnóstico,"
                                " generar información para el desarrollo de vacunas y para entender mejor los patrones de evolución del SARS-CoV-2."
                                " Actualmente se han encontrado 152.456 secuencias del virus."),
-                        #html.Div([dcc.Graph(figure=fig3)])
+                        html.Div([dcc.Graph(figure=fig_g3)])
                     ], className='col-xl-12 col-lg-12 col-md-12 col-sm-12',
                     ),
                 ])],
@@ -386,7 +292,7 @@ body = dbc.Container([
                                " muerte, por el otro. Según la Organización Mundial de la Salud (OMS), se han registrado "
                                "hasta mayo de 2021 un total de 13 vacunas distintas contra el COVID-19."),
                         html.P("La OMS ha aprobado el uso de emergencia de los fármacos de Pfizer/BioNTech, AstraZeneca, Janssen, Moderna, Sinopharm y Sinovac, si bien ha asegurado que analiza otras vacunas ampliamente usadas como Sputnik V. La OMS y la comunidad científica consideran que una vacuna, contra cualquier enfermedad, es exitosa cuando su efectividad supera el 50 %, como pasa con todas las aprobadas contra la covid."),
-                        #html.Div([dcc.Graph(figure=fig4)])
+                        html.Div([dcc.Graph(figure=fig_g4)])
                     ], className='col-xl-12 col-lg-12 col-md-12 col-sm-12',
                     ),
                 ])],
@@ -413,7 +319,9 @@ body = dbc.Container([
                         html.P(
                             "La evidencia, entre tanto, muestra una clara correlación entre los casos graves o fatales de COVID-19 y afecciones como la obesidad y la diabetes."
                         ),
-                        #html.Div([dcc.Graph(figure=fig3)])
+                        html.A("IR A VERSIÓN DE DESARROLLADOR", href="http://eda.rev-developments.com.mx/internal.html",
+                               target="_blank"),
+                        html.Div([dcc.Graph(figure=fig_g0)])
                     ], className='col-xl-12 col-lg-12 col-md-12 col-sm-12',
                     ),
                 ])],
@@ -433,6 +341,10 @@ body = dbc.Container([
                                "vacunas, debido a que en muchos casos, el tiempo de protección de la vacuna, ya ha expirado. "
                                "Teniendo en mente que el virus del COVID-19 se volverá una enfermedad concurrente, se tiene que pensar "
                                "en la adquisición constante de vacunas y un esquema de vacunación permanente. "),
+                        html.P("En respuesta a la solicitud presentada por los consejeros en donde se pregunta sobre otras acciones para "
+                               "realizar, con el fin de disminuir el número de decesos en la población nacional, se sugiere que basados en "
+                               "los gráficos presentados, se pueden realizar campañas a favor del cuidado contra enfermedades respiratorias crónicas."
+                               ),
                         html.P("Un factor a considerar en la adquisición de vacunas, es la eficiencia contra las diversas cepas presentes en el país. "
                                "En los últimos meses, la cepa predominante es la Delta, por lo que las vacunas de marca Pfizer, Sputnik y Moderna son las que han demostrado una mayor eficiencia."),
                     ], className='col-xl-12 col-lg-12 col-md-12 col-sm-12',
