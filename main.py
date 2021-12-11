@@ -158,7 +158,7 @@ df_g0 = pd.read_csv("data/tidy_data/graph0-gen_data_mx.csv")
 #dtv.data_visualization_g0(df_g0)
 #EDA.data_eda_g0(df_g0)
 
-
+"""
 import plotly.graph_objects as go
 df_g0.drop(df_g0.filter(regex="Unname"), axis=1, inplace=True)
 df_g0_sum = df_g0.groupby(['FECHA_DEF']).sum()
@@ -259,6 +259,8 @@ fig.update_layout(
 
 fig.show()
 fig.write_image('data/assets/g0/graph_g0.png')
+
+"""
 """
 df_g0_sum = df_g0.groupby('FECHA_DEF').sum()
 dtc.outlier_detection_g0(df_g0_sum)
@@ -267,6 +269,10 @@ EDA.data_eda_g0(df_g0_sum)
 
 df_g1 = dtp.data_preparation_g1()
 fig_g1 = dtp.data_manipulation_g1(df_g1)
+df_g2 = dtp.data_preparation_g2()
+fig_g2 = dtp.data_manipulation_g2(df_g2)
+
+
 
 body = dbc.Container([
         # region Introduccion
@@ -557,7 +563,7 @@ if __name__ == '__main__':
 
     #app.css.append_css({'external_url': '/static/styles.css'})
 
-    #app.run_server(debug=True)
+    app.run_server(debug=True)
     print("Finished")
 
 

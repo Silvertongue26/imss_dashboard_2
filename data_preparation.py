@@ -140,3 +140,16 @@ def data_manipulation_g1(df_g1):
     #endregion
 
     return fig
+
+def data_preparation_g1(num_row = None):
+    # Data cleaning for graph 1
+    df_g1_raw = pd.read_csv(
+        "https://raw.githubusercontent.com/Silvertongue26/imss_dashboard/main/data/graph1_vaccinated_mx.csv")
+    # Elimination of useless columns
+    df_g1_raw.pop('location')
+    df_g1_raw.pop('vaccine')
+    df_g1_raw.pop('total_vaccinations')
+    df_g1_raw.pop('total_boosters')
+    df_g1_raw.pop('source_url')
+
+    return df_g1_raw
