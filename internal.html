@@ -10,6 +10,14 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    <style type="text/css">
+        .tg  {border-collapse:collapse;border-spacing:0;}
+        .tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+          overflow:hidden;padding:10px 5px;word-break:normal;}
+        .tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+          font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+        .tg .tg-0pky{border-color:inherit;text-align:left;vertical-align:top}
+    </style>
     <style>
         body{
             text-align: justify!important;
@@ -137,7 +145,7 @@
                         <b>Procesos de Ingeniería de Características</b>
                     </h2>
                     <p style="font-size: 20px">
-                        En esta sección se describe el proceso de "data gathering", analisis exploratorio de datos(EDA),
+                        En esta sección se describe el proceso de "data gathering", análisis exploratorio de datos(EDA),
                         limpieza y visualización de datos.
                     </p>
                 </div>
@@ -148,7 +156,7 @@
                     <p style="font-size: 20px">
                         México superó a mitad de noviembre la barrera de las 100.000 muertes confirmadas por coronavirus, lo que lo convierte en el cuarto país con mayor número de muertes, después de Estados Unidos, Brasil e India.
 
-                        <br><br>Existe una gran variedad de razones por las cuales México a experimentado una pandemia tan mortal, unas de ellas son las comorbilidades, la exposición al contagio, el limitado acceso a los servicios de salud y tratamiento a tiempo, muchas veces debido a disparidades socioeconómicas.
+                        <br><br>Existe una gran variedad de razones por las cuales México ha experimentado una pandemia tan mortal, unas de ellas son las comorbilidades, la exposición al contagio, el limitado acceso a los servicios de salud y tratamiento a tiempo, muchas veces debido a disparidades socioeconómicas.
 
                         <br><br>Con el fin de poder definir las acciones a tomar para el próximo año 2022 y poder generar un refuerzo positivo en la población, no únicamente mediante la aplicación de vacunas, se anexa esta sección donde se presenta un panorama de las principales comorbilidades de la población mexicana, que en conjunto con el diagnóstico positivo de COVID-19, son las principales causas de muerte.
 
@@ -160,11 +168,11 @@
                         <b>2.- Data gathering</b>
                     </h4>
                     <p style="font-size: 20px">
-                        En esta sección se obtendran los datos desde la página <a target="_blank" href="https://www.gob.mx/salud/documentos/datos-abiertos-152127">https://www.gob.mx/salud/documentos/datos-abiertos-152127</a>,
-                        de donde obtendremos la información mas actualizada sobre los casos de COVID-19 en México.
+                        En esta sección se obtendrán los datos desde la página <a target="_blank" href="https://www.gob.mx/salud/documentos/datos-abiertos-152127">https://www.gob.mx/salud/documentos/datos-abiertos-152127</a>,
+                        de donde obtendremos la información más actualizada sobre los casos de COVID-19 en México.
                         <br><br>
                         Por motivos de ahorro de espacio en Github o el servidor, se realiza una validación para determinar la existencia de un dataset
-                        "tidy", en caso de que no exista exista, se procede a descargar y descomprimir el dataset en crudo y una vez terminado este proceso,
+                        "tidy", en caso de que no exista, se procede a descargar y descomprimir el dataset en crudo y una vez terminado este proceso,
                         se eliminan los documentos que ya no se utilizarán.
                         <br><b>Archivo: </b><a href="https://github.com/Silvertongue26/imss_dashboard_2/blob/master/data_preparation.py" target="_blank">data_preparation.py</a>
                     </p>
@@ -207,13 +215,13 @@
                         <b>3.- Limpieza y manejo de datos</b>
                     </h4>
                     <p style="font-size: 20px">
-                        Un vez que se han descargado los datos, estos se tienen en un formato en crudo, se procedere a eliminar información innecesaria,
-                        pues existen valores y columnas que no nos seran de utilidad para el fin establecido anteriormente.
-                        Se estara siguiendo un orden de depuracion decremental(Mayor a menor), para poder eliminar la mayor información posible desde el inicio.
+                        Una vez que se han descargado los datos, estos se tienen en un formato en crudo, se procederá a eliminar información innecesaria,
+                        pues existen valores y columnas que no nos serán de utilidad para el fin establecido anteriormente.
+                        Se estará siguiendo un orden de depuración decremental(Mayor a menor), para poder eliminar la mayor información posible desde el inicio.
                         <br><br>
                         <b>&emsp;Paso 1: Eliminación y depuración de datos</b>
-                        •Se eliminan las columnas inecesarias. <br>
-                        •Se filtran los valores que nos interesan (depunciones y casos positivos) <br>
+                        •Se eliminan las columnas innecesarias. <br>
+                        •Se filtran los valores que nos interesan (defunciones y casos positivos) <br>
                         •Se eliminan duplicados <br>
                         •Se convierte la columna de fechas en formato datetime <br>
                     </p>
@@ -256,7 +264,7 @@
                     </div>
                     <p style="font-size: 20px">
                         <br><br>
-                        Se muestra el resultado y forma del data set despues del proceso de limpieza basico,
+                        Se muestra el resultado y forma del dataset después del proceso de limpieza básico,
                         teniendo 248,561 registros y 15 columnas.
                     </p>
                     <pre>
@@ -407,7 +415,8 @@
                     <br><br>
                     <p style="font-size: 20px">
                         <b>&emsp;Paso 3: Creación del diccionario de datos</b><br>
-                        Una vez que se genera el dataframe en limpio, se porcede a generar un archivo con el dataset tidy.
+                        Una vez que tenemos las columnas correctas y la información limpia, se procede a generar un diccionario
+                        que le servirá al usuario para tener referencia del dataset.
                         <br><b>Diccionario de datos: </b><a href="https://github.com/Silvertongue26/imss_dashboard_2/blob/master/data/diccionarios_data/Diccionario_g0.xlsx" target="_blank">Diccionarios_g0.xlsx</a>
                     </p>
                     <button type="button" class="collapsible" style="text-align: center"><b>#VER DICCIONARIO</b></button>
@@ -524,12 +533,12 @@
                     <p style="font-size: 20px">
                         <br>
                         <b>&emsp;Paso 4: Detección y manejo de outliers</b><br>
-                        Se realiza una analisis de outlieres en general sobre las columnas que se han seleccionado para
+                        Se realiza un análisis de outlieres en general sobre las columnas que se han seleccionado para
                         determinar correlaciones entre ellas y encontrar outliers.
 
-                        En una vista general se puede observar la constancia de los valores en la mayoria de las columnas,
-                        que no presentan anomalias a considerar a excepción de EDAD y CLASIFICACION_FINAL, las cuales presentan una distribución
-                        interesante entre las 3 principales clasificaciónes y la distribución por edad.
+                        En una vista general se puede observar la constancia de los valores en la mayoría de las columnas,
+                        que no presentan anomalías a considerar a excepción de EDAD y CLASIFICACION_FINAL, las cuales presentan una distribución
+                        interesante entre las 3 principales clasificaciones y la distribución por edad.
                         <br>
                         <br>
                         <img src="https://raw.githubusercontent.com/Silvertongue26/imss_dashboard_2/master/data/assets/g0/pairplot_0.png" style="width:100%" alt="">
@@ -539,7 +548,7 @@
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" style="margin-top: 3%; ">
                     <p style="font-size: 20px">
                         <br>
-                        En la figura 2 y 3 se puede observar un poco mas a fondo lo sgrupos generados por la distribución
+                        En la figura 2 y 3 se puede observar un poco más a fondo los grupos generados por la distribución
                         de edad y el resto de los outliers.
                         <br>
                         <br>
@@ -572,8 +581,8 @@
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" style="margin-top: 3%; ">
                     <p style="font-size: 20px">
                         <br>
-                        Analizando la información directamente desde el archivo csv, se puede determinar que los valores tablecidos como outliers
-                        son valores perfectamente normales, solo que se precentan fuera del rango debido a la alta o baja edad, por lo que se
+                        Analizando la información directamente desde el archivo csv, se puede determinar que los valores establecidos como outliers
+                        son valores perfectamente normales, solo que se presentan fuera del rango debido a la alta o baja edad, por lo que se
                         determina el no eliminarlos del dataset.
                         <br>
                         <br>
@@ -584,13 +593,22 @@
                         <b>4.- Visualización de la información</b>
                     </h4>
                     <p style="font-size: 20px">
-                        En esta sección se estara aplicando el metodo PCA enfocado a la visualización de información en este dataset.<br>
-                        El metodo de Análisis de Componentes Principales o PCA es un método estadístico que permite simplificar
+                        En esta sección se estará aplicando el metodo PCA enfocado a la visualización de información en este dataset.<br>
+                        El método de Análisis de Componentes Principales o PCA es un método estadístico que permite simplificar
                         la complejidad de espacios muestrales con muchas dimensiones a la vez que conserva su información.
                         <br><br>
                     </p>
-                    <!--
-                    <button type="button" class="collapsible" style="text-align: center"><b>#VER VARIANCIAS</b></button>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12" style="margin-top: 3%; ">
+                    <img src="https://github.com/Silvertongue26/imss_dashboard_2/blob/master/data/assets/g0/pca_2.png?raw=true" style="width: 100%" alt="">
+                    <p style="text-align: center"><i>Figura 4</i></p>
+                    <p style="text-align: center">Se muestra la clasificación conforme a la edad</p>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12" style="margin-top: 1%; ">
+                    <img src="https://github.com/Silvertongue26/imss_dashboard_2/blob/master/data/assets/g0/pca_4.png?raw=true" style="width: 100%" alt="">
+                    <p style="text-align: center"><i>Figura 5</i></p>
+                    <p style="text-align: center">Representación de las varianzas obtenidas</p>
+                    <button type="button" class="collapsible" style="text-align: center"><b>#VER VARIANZAS</b></button>
                     <div class="content">
                         <pre>
                             <code style="overflow: scroll">
@@ -598,107 +616,254 @@
                             </code>
                         </pre>
                     </div>
-                    -->
                 </div>
-                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12" style="margin-top: 3%; ">
-                    <img src="https://github.com/Silvertongue26/imss_dashboard_2/blob/master/data/assets/g0/pairplot_1.png?raw=true" style="width: 100%" alt="">
-                    <p style="text-align: center"><i>Figura 2</i></p>
+                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12" style="margin-top: 1%; ">
+                    <img src="https://github.com/Silvertongue26/imss_dashboard_2/blob/master/data/assets/g0/pca_5.png?raw=true" style="width: 100%" alt="">
+                    <p style="text-align: center"><i>Figura 6</i></p>
+                    <p style="text-align: center">Se muestra la distribución de la clasificación mostrando
+                        una carga hacia las edades entre 60 y 80 años</p>
                 </div>
-                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12" style="margin-top: 3%; ">
-                    <img src="https://github.com/Silvertongue26/imss_dashboard_2/blob/master/data/assets/g0/pairplot_2.png?raw=true" style="width: 100%" alt="">
-                    <p style="text-align: center"><i>Figura 3</i></p>
-                </div>
-
-
-
-
-
-
-
-
-
-
-
-                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" style="margin-top: 3%; ">
-                    <p style="font-size: 20px">
-                                        <br>
-                                        <b>&emsp;Paso NEXT: Detección y manejo de outliers</b><br>
-                                        Se realiza un analisis exploratorio de la estructura del dataframe para poder determinar el tipo
-                                        de información y si existen datos repetidos para asi poder determinar las futuras acciones
-                                    </p>
-                    <pre>
-                        <code>
-                            Forma del dataframe: (295313, 16)
-                            Tipo de datos:
-                            SEXO                    int64
-                            ENTIDAD_RES             int64
-                            FECHA_DEF              object
-                            NEUMONIA                int64
-                            EDAD                    int64
-                            DIABETES                int64
-                            EPOC                    int64
-                            ASMA                    int64
-                            INMUSUPR                int64
-                            HIPERTENSION            int64
-                            OTRA_COM                int64
-                            CARDIOVASCULAR          int64
-                            OBESIDAD                int64
-                            RENAL_CRONICA           int64
-                            TABAQUISMO              int64
-                            CLASIFICACION_FINAL     int64
-                            dtype: object
-                            Duplicados:   6005
-                            Pos eliminación de duplicados: (289308, 16)
-                        </code>
-                    </pre>
-                </div>
-
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" style="margin-top: 3%; ">
                     <h4 style="text-align: left">
-                        <b>Análisis exploratorio de datos(EDA)</b>
+                        <b>5.- Análisis exploratorio de datos (EDA)</b>
                     </h4>
                     <p style="font-size: 20px">
-                        En esta sección se obtendran los datos desde la página <a target="_blank" href="https://www.gob.mx/salud/documentos/datos-abiertos-152127">https://www.gob.mx/salud/documentos/datos-abiertos-152127</a>,
-                        de donde obtendremos la información mas actualizada sobre los casos de COVID-19 en México.
-                        <br><br>
-                        Por motivos de ahorro de espacio en Github o el servidor, se realiza una validación para determinar la existencia de un dataset
-                        crudo, en caso de que no exista exista, se procede a descargar y descomprimir el dataset en crudo y una vez terminado este proceso,
-                        se eliminan los documentos que ya no se utilizarán. <br><b>Archivo:</b> <a href="https://github.com/Silvertongue26/imss_dashboard_2/blob/master/data_preparation.py" target="_blank">data_preparation.py</a>
+                        En esta sección se estará realizando un Análisis Exploratorio de Datos, que consta
+                        en el uso de gráficos y métodos para explorar y analizar un conjunto de datos.
+                        Estos métodos los vamos a emplear con el fin de se puedan encontrar anomalías,
+                        valores atípicos, patrones, relaciones entre variables.
                     </p>
-                    <pre>
-                        <code>
-                        #Descarga el dataset
-                        if(path.exists("data/raw_data/graph0-RAW.csv") == False):
-                            wget.download('https://datosabiertos.salud.gob.mx/gobmx/salud/datos_abiertos/datos_abiertos_covid19.zip',
-                            "data/raw_data" )
-                            with ZipFile("data/raw_data/datos_abiertos_covid19.zip", 'r') as zip:
-                                #Muestra los contenidos del archivo zip
-                                zip.printdir()
-                                #Se extraen los documentos
-                                print('Extracting all the files now...')
-                                zip.extractall("data/raw_data")
-                                print('Done!')
-
-                            filename = glob("data/raw_data/*COVID19MEXICO.csv")[0]
-                            os.rename(filename, "data/raw_data/graph0-RAW.csv")
-
-                            df_g0_raw = pd.read_csv("data/raw_data/graph0-RAW.csv", nrows=100)
-
-                        else:
-                            df_g0_raw = pd.read_csv(
-                                "data/raw_data/graph0-RAW.csv", nrows=num_rows)
-                            # Se eliminan los documentos extras para reducir espacio
-                            if (path.exists("data/raw_data/datos_abiertos_covid19.zip")):
-                                os.remove("data/raw_data/datos_abiertos_covid19.zip")
-
-                            if (path.exists("data/raw_data/graph0-RAW.csv")):
-                                os.remove("data/raw_data/graph0-RAW.csv")
-                        </code>
-                    </pre>
                 </div>
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" style="margin-top: 3%; ">
+                    <p style="font-size: 20px">
+                        <b>&emsp;Paso 1: Estructura de datos</b>
+                        Se puede observar que tiene el dataframe tiene una estructura de 248,561 registros y 15 columnas.<br>
+                        Principalmente sus valores son enteros.
+                    </p>
+                    <button type="button" class="collapsible" style="text-align: center"><b>#VER ESTRUCTURA</b></button>
+                    <div class="content">
+                        <pre>
+                            <code style="overflow: scroll">
+                                Forma del dataframe: (248561, 15)
+                                Tipo de datos:
+                                SEXO                    int64
+                                FECHA_DEF              object
+                                NEUMONIA                int64
+                                EDAD                    int64
+                                DIABETES                int64
+                                EPOC                    int64
+                                ASMA                    int64
+                                INMUSUPR                int64
+                                HIPERTENSION            int64
+                                OTRA_COM                int64
+                                CARDIOVASCULAR          int64
+                                OBESIDAD                int64
+                                RENAL_CRONICA           int64
+                                TABAQUISMO              int64
+                                CLASIFICACION_FINAL     int64
 
+
+
+                                <table class="tg">
+                                <thead>
+                                  <tr>
+                                    <th class="tg-0pky">SEXO</th>
+                                    <th class="tg-0pky">NEUMONIA</th>
+                                    <th class="tg-0pky">EDAD</th>
+                                    <th class="tg-0pky">DIABETES</th>
+                                    <th class="tg-0pky">EPOC</th>
+                                    <th class="tg-0pky">ASMA</th>
+                                    <th class="tg-0pky">INMUSUPR</th>
+                                    <th class="tg-0pky">HIPERTENSION</th>
+                                    <th class="tg-0pky">OTRA_COM</th>
+                                    <th class="tg-0pky">CARDIOVASCULAR</th>
+                                    <th class="tg-0pky">OBESIDAD</th>
+                                    <th class="tg-0pky">RENAL_CRONICA</th>
+                                    <th class="tg-0pky">TABAQUISMO</th>
+                                    <th class="tg-0pky">CLASIFICACION_FINAL</th>
+                                    <th class="tg-0pky"></th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr>
+                                    <td class="tg-0pky">count</td>
+                                    <td class="tg-0pky">248561.000000</td>
+                                    <td class="tg-0pky">248561.000000</td>
+                                    <td class="tg-0pky">248561.000000</td>
+                                    <td class="tg-0pky">248561.000000</td>
+                                    <td class="tg-0pky">248561.000000</td>
+                                    <td class="tg-0pky">248561.000000</td>
+                                    <td class="tg-0pky">248561.000000</td>
+                                    <td class="tg-0pky">248561.000000</td>
+                                    <td class="tg-0pky">248561.000000</td>
+                                    <td class="tg-0pky">248561.000000</td>
+                                    <td class="tg-0pky">248561.000000</td>
+                                    <td class="tg-0pky">248561.000000</td>
+                                    <td class="tg-0pky">248561.000000</td>
+                                    <td class="tg-0pky">248561.000000</td>
+                                  </tr>
+                                  <tr>
+                                    <td class="tg-0pky">mean</td>
+                                    <td class="tg-0pky">1.596827</td>
+                                    <td class="tg-0pky">1.305225</td>
+                                    <td class="tg-0pky">62.828308</td>
+                                    <td class="tg-0pky">2.201339</td>
+                                    <td class="tg-0pky">2.530715</td>
+                                    <td class="tg-0pky">2.540282</td>
+                                    <td class="tg-0pky">2.551221</td>
+                                    <td class="tg-0pky">2.098366</td>
+                                    <td class="tg-0pky">3.027695</td>
+                                    <td class="tg-0pky">2.534139</td>
+                                    <td class="tg-0pky">2.267826</td>
+                                    <td class="tg-0pky">2.496236</td>
+                                    <td class="tg-0pky">2.513580</td>
+                                    <td class="tg-0pky">2.874260</td>
+                                  </tr>
+                                  <tr>
+                                    <td class="tg-0pky">std</td>
+                                    <td class="tg-0pky">0.490536</td>
+                                    <td class="tg-0pky">0.537170</td>
+                                    <td class="tg-0pky">15.185187</td>
+                                    <td class="tg-0pky">7.559937</td>
+                                    <td class="tg-0pky">7.452058</td>
+                                    <td class="tg-0pky">7.318827</td>
+                                    <td class="tg-0pky">7.424004</td>
+                                    <td class="tg-0pky">7.401109</td>
+                                    <td class="tg-0pky">10.161905</td>
+                                    <td class="tg-0pky">7.519150</td>
+                                    <td class="tg-0pky">6.989306</td>
+                                    <td class="tg-0pky">7.418969</td>
+                                    <td class="tg-0pky">7.579009</td>
+                                    <td class="tg-0pky">0.421196</td>
+                                  </tr>
+                                  <tr>
+                                    <td class="tg-0pky">min</td>
+                                    <td class="tg-0pky">1.000000</td>
+                                    <td class="tg-0pky">1.000000</td>
+                                    <td class="tg-0pky">0.000000</td>
+                                    <td class="tg-0pky">1.000000</td>
+                                    <td class="tg-0pky">1.000000</td>
+                                    <td class="tg-0pky">1.000000</td>
+                                    <td class="tg-0pky">1.000000</td>
+                                    <td class="tg-0pky">1.000000</td>
+                                    <td class="tg-0pky">1.000000</td>
+                                    <td class="tg-0pky">1.000000</td>
+                                    <td class="tg-0pky">1.000000</td>
+                                    <td class="tg-0pky">1.000000</td>
+                                    <td class="tg-0pky">1.000000</td>
+                                    <td class="tg-0pky">1.000000</td>
+                                  </tr>
+                                  <tr>
+                                    <td class="tg-0pky">25%</td>
+                                    <td class="tg-0pky">1.000000</td>
+                                    <td class="tg-0pky">1.000000</td>
+                                    <td class="tg-0pky">53.000000</td>
+                                    <td class="tg-0pky">1.000000</td>
+                                    <td class="tg-0pky">2.000000</td>
+                                    <td class="tg-0pky">2.000000</td>
+                                    <td class="tg-0pky">2.000000</td>
+                                    <td class="tg-0pky">1.000000</td>
+                                    <td class="tg-0pky">2.000000</td>
+                                    <td class="tg-0pky">2.000000</td>
+                                    <td class="tg-0pky">2.000000</td>
+                                    <td class="tg-0pky">2.000000</td>
+                                    <td class="tg-0pky">2.000000</td>
+                                    <td class="tg-0pky">3.000000</td>
+                                  </tr>
+                                  <tr>
+                                    <td class="tg-0pky">50%</td>
+                                    <td class="tg-0pky">2.000000</td>
+                                    <td class="tg-0pky">1.000000</td>
+                                    <td class="tg-0pky">64.000000</td>
+                                    <td class="tg-0pky">2.000000</td>
+                                    <td class="tg-0pky">2.000000</td>
+                                    <td class="tg-0pky">2.000000</td>
+                                    <td class="tg-0pky">2.000000</td>
+                                    <td class="tg-0pky">2.000000</td>
+                                    <td class="tg-0pky">2.000000</td>
+                                    <td class="tg-0pky">2.000000</td>
+                                    <td class="tg-0pky">2.000000</td>
+                                    <td class="tg-0pky">2.000000</td>
+                                    <td class="tg-0pky">2.000000</td>
+                                    <td class="tg-0pky">3.000000</td>
+                                  </tr>
+                                  <tr>
+                                    <td class="tg-0pky">75%</td>
+                                    <td class="tg-0pky">2.000000</td>
+                                    <td class="tg-0pky">2.000000</td>
+                                    <td class="tg-0pky">74.000000</td>
+                                    <td class="tg-0pky">2.000000</td>
+                                    <td class="tg-0pky">2.000000</td>
+                                    <td class="tg-0pky">2.000000</td>
+                                    <td class="tg-0pky">2.000000</td>
+                                    <td class="tg-0pky">2.000000</td>
+                                    <td class="tg-0pky">2.000000</td>
+                                    <td class="tg-0pky">2.000000</td>
+                                    <td class="tg-0pky">2.000000</td>
+                                    <td class="tg-0pky">2.000000</td>
+                                    <td class="tg-0pky">2.000000</td>
+                                    <td class="tg-0pky">3.000000</td>
+                                  </tr>
+                                  <tr>
+                                    <td class="tg-0pky">max</td>
+                                    <td class="tg-0pky">2.000000</td>
+                                    <td class="tg-0pky">99.000000</td>
+                                    <td class="tg-0pky">121.000000</td>
+                                    <td class="tg-0pky">98.000000</td>
+                                    <td class="tg-0pky">98.000000</td>
+                                    <td class="tg-0pky">98.000000</td>
+                                    <td class="tg-0pky">98.000000</td>
+                                    <td class="tg-0pky">98.000000</td>
+                                    <td class="tg-0pky">98.000000</td>
+                                    <td class="tg-0pky">98.000000</td>
+                                    <td class="tg-0pky">98.000000</td>
+                                    <td class="tg-0pky">98.000000</td>
+                                    <td class="tg-0pky">98.000000</td>
+                                    <td class="tg-0pky">3.000000</td>
+                                  </tr>
+                                </tbody>
+                                </table>
+                            </code>
+                        </pre>
+                    </div>
+                </div>
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" style="margin-top: 3%; ">
+                    <p style="font-size: 20px">
+                        <b>&emsp;Paso 2: Heatmap</b>
+                        Un mapa de calor es una forma de representar los datos en una forma bidimensional.
+                        Los valores de los datos son representados como colores en el gráfico.
+                        La meta del mapa de calor es proporcionar un resumen visual a color de la
+                        información de la correlación entre las variables.
+                        <br><br>
+                        Como se puede observar en la figura 7, la correlación principal, se encuentra entre las variables
+                        de las comorbilidades, esto debido a que los rangos que se presentan son definidos por igual para todas
+                        las comorbilidades, que de igual manera también muestra una relación entre la aparición de una o más por persona,
+                        aumentando la posibilidad de fallecimiento.
+                        <img src="https://github.com/Silvertongue26/imss_dashboard_2/blob/master/data/assets/g0/heatmap.png?raw=true" style="width: 100%" alt="">
+                        <p style="text-align: center"><i>Figura 7</i></p>
+                    </p>
+                </div>
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" style="margin-top: 3%; ">
+                    <p style="font-size: 20px">
+                        <b>&emsp;Paso 3: Pandas profiler</b>
+                        Panas profiler es una herramienta que permite automatizar el análisis de datos en Python,
+                        generando automáticamente informes de los conjuntos de datos contenidos en nuestro DataFrame.
+                        <br><br>
+                        Conforme a nuestros análisis anteriores el siguiente profiler, comprueba lo antes mencionado en el texto,
+                        sobre las correlaciones, comportamiento, estructura e interpretaciones del dataframe.
+                        <br><br>
+                        <b>Archivo: </b><a href="https://github.com/Silvertongue26/imss_dashboard_2/blob/master/data/assets/g0/eda_g0_profile.html" target="_blank">eda_g0_profile.html</a>
+                        <div class="content">
+                        </div>
+                        <button type="button" class="collapsible" style="text-align: center"><b>#VER PANDAS PROFILE</b></button>
+                        <div class="content">
+                            <div>
+                            <iframe src="http://eda.rev-developments.com.mx/" style="width:100%; height: 600px" frameborder="0"></iframe>
+                            </div>
+                        </div>
+                    </p>
+                </div>
             </div>
-
     </div>
 </body>
 <script>

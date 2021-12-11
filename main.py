@@ -154,8 +154,8 @@ df_g0 = dtp.data_preparation_g0()
 #df_g0 = dtc.data_cleaning_g0(df_g0, "graph0-gen_data_mx.csv")
 
 #dtc.outlier_detection_g0(df_g0)
-dtv.data_visualization_g0(df_g0)
-#EDA.data_eda_g0(df_g0)
+#dtv.data_visualization_g0(df_g0)
+EDA.data_eda_g0(df_g0)
 
 """
 df_g0_sum = df_g0.groupby('FECHA_DEF').sum()

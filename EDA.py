@@ -1,18 +1,8 @@
-import dash
 import pandas as pd
-import plotly.graph_objs as go
-from dash.dependencies import Output, Input, State
-import dash_table_experiments as dt
-from plotly.graph_objs.layout import Margin
-from dash import dcc, html
 from pandas_profiling import ProfileReport
-from sklearn.neighbors import LocalOutlierFactor
 import sweetviz
-import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
-from sklearn.manifold import TSNE
-import time
 
 desired_width = 320
 pd.set_option('display.width', desired_width)
@@ -20,17 +10,23 @@ pd.set_option('display.width', desired_width)
 def data_eda_g0(df_g0):
     print("******************* STARTING EDA g0 *******************")
     df_g0.drop(df_g0.filter(regex="Unname"), axis=1, inplace=True)
+    pd.set_option("display.max_rows", None, "display.max_columns", None)
+
     print("Forma del dataframe: " + str(df_g0.shape))
 
     print("Tipo de datos: ")
     print(df_g0.dtypes)
 
+    print("Descripción: ")
+    print(df_g0.describe())
+
     df_g0["SEXO"].replace({1: "Mujer", 2: "Hombre"}, inplace=True)
 
     df_g0_sum = df_g0.groupby(['FECHA_DEF', 'SEXO']).sum()
-    #print(df_g0.groupby('FECHA_DEF').sum())
-    print(df_g0_sum.head(5))
-    print(df_g0_sum.columns)
+
+    print(df_g0.groupby('FECHA_DEF').sum())
+    print(df_g0_sum.head(10))
+    #print(df_g0_sum.columns)
     print(df_g0_sum.agg(['mean', 'min', 'max']))
 
     df_g0["SEXO"].replace({"Mujer":1, "Hombre":2}, inplace=True)
@@ -43,7 +39,7 @@ def data_eda_g0(df_g0):
 
     #print(df_g0.groupby(df_g0['FECHA_DEF']))
     df_profile = ProfileReport(
-        df_g0_sum,
+        df_g0,
         explorative=True,
         title='Comportamiento de dataframe',
         html={'style': {'full_width': False}}
